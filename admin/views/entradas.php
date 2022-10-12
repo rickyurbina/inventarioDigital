@@ -14,25 +14,24 @@
     <div class="col-xl-6">
         <div class="card m-b-20">
             <div class="card-header">
-                <h3 class="card-title">Información del Proveedor</h3>
+                <h3 class="card-title">Proveedor </h3>
+                    <div class="col-sm-10 col-md-10">
+                        <div class="form-group">
+                            <select class="form-control" name="idProveedor" id="idProveedor">
+                                <?php $proveedores = new providers(); $proveedores -> ctlListProveedores();?>
+                            </select>
+                        </div>
+                    </div>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="form-label">Orden: <?php echo $siguiente; ?></label> 
+                            <label class="form-label"># Factura: <?php echo $siguiente; ?></label> 
                             
                             <h3 class="text-center"><strong> </strong></h3>
                             <input type="text" class="form-control" name="ordenNum" id="ordenNum" value="<?php echo $siguiente; ?>" required>
 
-                        </div>
-                    </div>
-                    <div class="col-sm-8 col-md-8">
-                        <div class="form-group">
-                            <label class="form-label">Proveedor</label>
-                            <select class="form-control" name="idProveedor" id="idProveedor">
-                                <?php $proveedores = new providers(); $proveedores -> ctlListProveedores();?>
-                            </select>
                         </div>
                     </div>
                     <div class="col-sm-3 col-md-4">
@@ -67,6 +66,12 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                <div class="col-sm-3 col-md-3">
+                        <div class="form-group">
+                            <label class="form-label">Clave Producto</label>
+                            <input type="text" class="form-control" name="clave" id="clave">
+                        </div>
+                    </div>
                     <div class="col-sm-6 col-md-6">
                         <div class="form-group">
                             <label class="form-label">Producto</label>
@@ -75,19 +80,14 @@
                             </select>
                         </div>
                     </div>
-                    <!-- <div class="col-sm-3 col-md-3">
-                        <div class="form-group">
-                            <label class="form-label">Clave Producto</label>
-                            <input type="text" class="form-control" name="clave" id="clave">
-                        </div>
-                    </div> -->
+                    
                             
-                    <div class="col-sm-3 col-md-3">
+                    <!-- <div class="col-sm-3 col-md-3">
                         <div class="form-group">
                             <label class="form-label">Lote</label>
                             <input type="text" class="form-control" name="lote" id="lote">
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-sm-3 col-md-3">
                         <div class="form-group">
@@ -148,7 +148,6 @@
                     <table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
                         <thead>
                             <th>Producto</th>
-                            <th>Lote</th>
                             <th>Cantidad</th>
                             <th>Costo</th>
                             <th></th>

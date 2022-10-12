@@ -51,7 +51,6 @@ function viewSearchResult(data){
         id: Date.now()+i,
         idProducto: data[i]["idProducto"],
         nombre: data[i]["name"],
-        lote: data[i]["lote"],
         disponible: data[i]["disponible"],
         precio: data[i]["dayPrice"],
         cantidad: 0,
@@ -71,12 +70,13 @@ function creaOpciones(){
   if (listaProds.length > 0){
     listaProds.forEach( ft =>{
       ///   crea los elementos necesarios para la tabla de resultados del LiveSearch
+      console.log(ft);
 
       let renglon = document.createElement("tr");
       let btnColumn = document.createElement("td");
       let inputColumn = document.createElement("td");
       let inputField = document.createElement("input");
-      inputColumn.style.width="40px";
+      inputColumn.style.width="10px";
       inputField.setAttribute('id', "cant"+ft.id);
       inputField.setAttribute('min', 1);
       inputField.setAttribute('max', ft.disponible);
@@ -105,7 +105,6 @@ function creaOpciones(){
 
       renglon.innerHTML = `
         <td>${ft.nombre}</td>
-        <td>${ft.lote}</td>
         <td>${ft.disponible}</td>
         <td>${ft.precio}</td>
       `;
@@ -162,7 +161,6 @@ function creaListaPedido(){
 
       renglon.innerHTML = `
         <td>${prod.nombre}</td>
-        <td>${prod.lote}</td>
         <td id="precio-${prod.id}">${prod.precio}</td>
         <td id="cant-${prod.id}">${prod.cantidad}</td>
       `;

@@ -23,7 +23,6 @@ Class Salidas {
           $datos_prods = array( "idProducto" => $item["idProducto"],
                                 "cantidad" => $item["cantidad"],
                                 "medida" => $item["medida"],                                
-                                "lote" => $item["lote"],
                                 "idCliente" => $_POST["idCliente"],
                                 "precio" => $item["precio"],
                                 "pedido" => $_POST["pedidoNum"]);

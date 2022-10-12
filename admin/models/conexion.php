@@ -4,7 +4,7 @@ class Conexion{
 
 	public static function conectar(){
 // conexion local -------------------------------
-		$bd = "verdin";
+		$bd = "inventarioDigital";
 		$servername = "localhost";
 		$username = "root";
 		$password = "12345678";

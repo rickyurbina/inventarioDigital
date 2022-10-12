@@ -8,7 +8,7 @@ const fechaMovimiento = document.querySelector("#fechaMovimiento");
 const idProducto = document.querySelector("#idProducto");
 
 
-const lote = document.querySelector("#lote");
+// const lote = document.querySelector("#lote");
 const cantidad = document.querySelector("#cantidad");
 const medida = document.querySelector("#medida");
 const costo = document.querySelector("#costo");
@@ -44,9 +44,9 @@ function agregaProducto(e){
     const nomProducto = idProducto.options[idProducto.selectedIndex].text;
     const nomMedida = medida.options[medida.selectedIndex].text;
     const nomCantidad = cantidad.value;
-    console.log(idProducto.value, idProd, nomProducto, lote.value, cantidad.value, medida.value, costo.value);
+    console.log(idProducto.value, idProd, nomProducto, cantidad.value, medida.value, costo.value);
 
-    if (lote.value === '' || nomProducto === ''){
+    if (nomProducto === ''){
         mostrarError('Complete los valores');
         return
     }
@@ -55,7 +55,6 @@ function agregaProducto(e){
         id: Date.now(),
         idProducto: idProd,
         producto: nomProducto,
-        lote: lote.value,
         cantidad: nomCantidad,
         medida: nomMedida,
         costo: costo.value
@@ -67,7 +66,7 @@ function agregaProducto(e){
     crearHTML(nomProducto, nomMedida, nomCantidad);
     // reiniciar las cajas de texto 
     //featName.value = "";
-    lote.value = "";
+    // lote.value = "";
     
 }
 
@@ -100,7 +99,7 @@ function crearHTML(nomProducto, nomMedida, nomCantidad){
             let hilera = document.createElement("tr");
             
             let celdaProducto = document.createElement("td");
-            let celdaLote = document.createElement("td");
+            // let celdaLote = document.createElement("td");
             let celdaCantidad = document.createElement("td");
             let celdaCosto = document.createElement("td");
             let celdaBtnBorrar = document.createElement("td");
@@ -128,12 +127,12 @@ function crearHTML(nomProducto, nomMedida, nomCantidad){
             let txtCosto = document.createTextNode(prod.costo);
 
             celdaProducto.appendChild(txtProducto);
-            celdaLote.appendChild(txtLote);
+            // celdaLote.appendChild(txtLote);
             celdaCantidad.appendChild(txtPeso);
             celdaCosto.appendChild(txtCosto);
 
             hilera.appendChild(celdaProducto);
-            hilera.appendChild(celdaLote);
+            // hilera.appendChild(celdaLote);
             hilera.appendChild(celdaCantidad);
             hilera.appendChild(celdaCosto);
             hilera.appendChild(celdaBtnBorrar);

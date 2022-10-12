@@ -20,7 +20,6 @@ Class Movimientos {
         // por cada producto en la orden registro en la tabla de entradas
         foreach ($prods as $row => $item){
           $datos_prods = array( "idProducto" => $item["idProducto"],
-                                "lote" => $item["lote"],
                                 "cantidad" => $item["cantidad"],
                                 "disponible" => $item["cantidad"],
                                 "medida" => $item["medida"],
@@ -101,7 +100,6 @@ Class Movimientos {
             // por cada producto en la orden registro en la tabla de entradas
             foreach ($prods as $row => $item){
               $datos_prods = array( "idProducto" => $item["idProducto"],
-                                    "lote" => $item["lote"],
                                     "cantidad" => $item["cantidad"],
                                     "medida" => $item["medida"],
                                     "costo" => $item["costo"],

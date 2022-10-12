@@ -77,13 +77,6 @@
                             </select>
                         </div>
                     </div>
-                            
-                    <div class="col-sm-3 col-md-3">
-                        <div class="form-group">
-                            <label class="form-label">Lote</label>
-                            <input type="text" class="form-control" name="lote" id="lote">
-                        </div>
-                    </div>
 
                     <div class="col-sm-3 col-md-3">
                         <div class="form-group">
@@ -143,7 +136,6 @@
                     <table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
                         <thead>
                             <th>Producto</th>
-                            <th>Lote</th>
                             <th>Cantidad</th>
                             <th>Costo</th>
                             <th></th>

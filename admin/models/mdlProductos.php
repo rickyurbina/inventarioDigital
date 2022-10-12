@@ -187,12 +187,11 @@ class mdlProductos {
 	public function mdlLiveUpdate($producto){
 
 		//$stmt = Conexion::conectar()->prepare("SELECT * FROM productos WHERE name LIKE :nombres OR claveProducto LIKE :nombres");
-		$stmt = Conexion::conectar()->prepare("UPDATE `entradas` SET `disponible`=`disponible` - :cantidad WHERE `idProducto`= :id AND `lote` = :lote");
+		$stmt = Conexion::conectar()->prepare("UPDATE `entradas` SET `disponible`=`disponible` - :cantidad WHERE `idProducto`= :id");
 		
 		//$stmt -> execute(["nombres" => "%" . $nombres . "%"]);
 		$stmt -> bindPARAM(":id",$producto["idProducto"], PDO::PARAM_INT);
         $stmt -> bindPARAM(":cantidad",$producto["cantidad"], PDO::PARAM_INT);
-		$stmt -> bindPARAM(":lote",$producto["lote"], PDO::PARAM_INT);
 
 		if ($stmt->execute()){
 			return "success";

@@ -12,32 +12,25 @@
             <div class="card-body ">
                 <form method="POST">
                     <div class="card-header">
-                        <h3 class="card-title">Información del Cliente</h3>
-                        <div class="card-options"><button type="submit" class="btn btn-sm btn-blue" name="regPedido" href="busca.php">Guardad Pedido</button> </div>
+                        <h3 class="card-title">Cliente</h3>
+                        <div class="col-md-9">
+                                <div class="form-group">
+                                    <select class="form-control" name="idCliente" id="idCliente">
+                                        <?php $clientes = new clientes(); $clientes -> ctlListClientes();?>
+                                    </select>
+                                </div>
+                            </div>
                     </div>
                     
                         <div class="row">
                             <div class="col-md-3 text-center">
                                 <div class="form-group">
                                     <label class="form-label">Pedido <?php echo $siguiente; ?></label>
-                                    <!-- <input type="text" class="form-control" name="pedidoNum" id="pedidoNum" required> -->
-                                    
-                                    
                                     <input type="text" class="form-control" name="pedidoNum" id="pedidoNum" value="<?php echo $siguiente; ?>" >
                                 </div>
                             </div>
-                            <div class="col-md-9">
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Cliente</label>
-                                    <select class="form-control" name="idCliente" id="idCliente">
-                                        <?php $clientes = new clientes(); $clientes -> ctlListClientes();?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6 col-md-6">
+
+                            <div class="col-sm-3 col-md-3">
                                 <div class="form-group">
                                     <label class="form-label">Concepto</label>
                                     <select class="form-control custom-select select2" name="concepto" id="concepto">
@@ -55,7 +48,9 @@
                                     <input type="text" class="form-control" name="totalPedidoBD" id="totalPedidoBD" hidden>
                                 </div>
                             </div>
+                            <button type="submit" class="btn btn-sm btn-blue" name="regPedido" href="busca.php">Guardad Pedido</button> 
                             
+                            <div class="card-options"></div>
                         </div>  <!-- row -->
                 </form>
                 <?php
@@ -78,7 +73,6 @@
                     <table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
                         <thead>
                             <th>Producto</th>
-                            <th>Lote</th>
                             <th>Disp</th>
                             <th>$</th>
                             <th style="width: 40.406px;">Cant</th>
@@ -107,7 +101,6 @@
                         <table class="table card-table table-bordered table-hover table-vcenter text-nowrap">
                             <thead>
                                 <th>Producto</th>
-                                <th>Lote</th>
                                 <th>Precio</th>
                                 <th>Cantidad</th>
                                 <th></th>

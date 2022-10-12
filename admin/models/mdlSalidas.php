@@ -86,30 +86,29 @@ class mdlSalidas {
 
     public static function mdlRegistraProdsPedido($datos_prods){
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO `salidas` (`id`, `idProducto`, `cantidad`, `medida`, `lote`, `idCliente`, `precio`, `pedido`) 
-        VALUES (NULL, :idProducto, :cantidad, :medida, :lote, :idCliente, :precio, :pedido);");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO `salidas` (`id`, `idProducto`, `cantidad`, `medida`, `idCliente`, `precio`, `pedido`) 
+        VALUES (NULL, :idProducto, :cantidad, :medida, :idCliente, :precio, :pedido);");
         
          $stmt -> bindParam(":idProducto", $datos_prods["idProducto"], PDO::PARAM_INT);
          $stmt -> bindParam(":cantidad", $datos_prods["cantidad"], PDO::PARAM_INT);
          $stmt -> bindParam(":medida", $datos_prods["medida"], PDO::PARAM_STR);
-         $stmt -> bindParam(":lote", $datos_prods["lote"], PDO::PARAM_STR);
          $stmt -> bindParam(":idCliente", $datos_prods["idCliente"], PDO::PARAM_INT);
          $stmt -> bindParam(":precio", $datos_prods["precio"], PDO::PARAM_STR);
          $stmt -> bindParam(":pedido", $datos_prods["pedido"], PDO::PARAM_INT);
 
          //UPDATE entradas SET `disponible` = `disponible` - 25 WHERE `idProducto` = 38 AND `lote` = 1
-         $stmt2 = Conexion::conectar()->prepare("UPDATE entradas SET `disponible` = `disponible` - :cantidad WHERE `idProducto` = :idProducto AND `lote` = :lote");
+         $stmt2 = Conexion::conectar()->prepare("UPDATE productos SET `disponibilidad` = `disponibilidad` - :cantidad WHERE `idProducto` = :idProducto");
          $stmt2 -> bindParam(":idProducto", $datos_prods["idProducto"], PDO::PARAM_INT);
-         $stmt2 -> bindParam(":lote", $datos_prods["lote"], PDO::PARAM_STR);
+        //  $stmt -> bindParam(":pedido", $datos_prods["pedido"], PDO::PARAM_INT);
          $stmt2 -> bindParam(":cantidad", $datos_prods["cantidad"], PDO::PARAM_INT);
 
 
-         $stmt3 = Conexion::conectar()->prepare("UPDATE productos SET disponibilidad = (SELECT SUM(`disponible`) FROM `entradas` WHERE `idProducto`= :idProducto) WHERE idProducto = :idProducto");
-         $stmt3 -> bindParam(":idProducto", $datos_prods["idProducto"], PDO::PARAM_INT);
+        //  $stmt3 = Conexion::conectar()->prepare("UPDATE productos SET disponibilidad = (SELECT SUM(`disponible`) FROM `entradas` WHERE `idProducto`= :idProducto) WHERE idProducto = :idProducto");
+        //  $stmt3 -> bindParam(":idProducto", $datos_prods["idProducto"], PDO::PARAM_INT);
          
         if ($stmt -> execute()){
             if($stmt2 -> execute())
-                if($stmt3 -> execute())
+                // if($stmt3 -> execute())
                 return "ok";
         }
         else {
