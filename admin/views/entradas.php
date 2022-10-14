@@ -2,62 +2,20 @@
     $orden = new Movimientos(); 
     $siguiente = $orden -> ctrSiguienteRegistro('entradas'); 
 ?>
-<div class="page-header">
+<!-- <div class="page-header">
     <h4 class="page-title">Registro de Productos</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Products Admin</a></li>
         <li class="breadcrumb-item active" aria-current="page">Products Register</li>
     </ol>
-</div>
+</div> -->
+<br>
 <form method="POST" name="entradas">
+<div class="text-right">
+    <button type="submit" id="regOrden" name="regOrden" class="btn btn-primary">Guardar Orden</button><br><br>
+</div>
 <div class="row col-12">
-    <div class="col-xl-6">
-        <div class="card m-b-20">
-            <div class="card-header">
-                <h3 class="card-title">Proveedor </h3>
-                    <div class="col-sm-10 col-md-10">
-                        <div class="form-group">
-                            <select class="form-control" name="idProveedor" id="idProveedor">
-                                <?php $proveedores = new providers(); $proveedores -> ctlListProveedores();?>
-                            </select>
-                        </div>
-                    </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="form-label"># Factura: <?php echo $siguiente; ?></label> 
-                            
-                            <h3 class="text-center"><strong> </strong></h3>
-                            <input type="text" class="form-control" name="ordenNum" id="ordenNum" value="<?php echo $siguiente; ?>" required>
-
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Concepto</label>
-                            <select class="form-control custom-select select2" name="concepto" id="concepto">
-                                <option value="entrada">Entrada</option>
-                                <option value="ajuste">Ajuste</option>
-                                <option value="saldo">Saldo Inicial</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 col-md-4">
-                        <div class="form-group">
-                            <label class="form-label">Fecha</label>
-                            <input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" name="fechaMovimiento" id="fechaMovimiento">
-                        </div>
-                    </div>
-                    <div class="col-sm-9 col-md-9">
-                        
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <div class="col-xl-6">
         <div class="card m-b-20">
@@ -124,17 +82,68 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-12 ">
-        <div class="form-group">
-            <input type="text" class="form-control" name="productosBD" id="productosBD" hidden>
+    <div class="col-xl-6">
+        <div class="card m-b-20">
+            <div class="card-header">
+                <h3 class="card-title">Proveedor </h3>
+                <div class="col-sm-8 col-md-8">
+                    <div class="form-group">
+                        <select class="form-control" name="idProveedor" id="idProveedor">
+                            <?php $proveedores = new providers(); $proveedores -> ctlListProveedores();?>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-options">
+                    <a href="#" class="card-options-collapse collapse" aria-expanded="false" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label"># Factura: <?php echo $siguiente; ?></label> 
+                            
+                            <h3 class="text-center"><strong> </strong></h3>
+                            <input type="text" class="form-control" name="ordenNum" id="ordenNum" value="<?php echo $siguiente; ?>" required>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Concepto</label>
+                            <select class="form-control custom-select select2" name="concepto" id="concepto">
+                                <option value="entrada">Entrada</option>
+                                <option value="ajuste">Ajuste</option>
+                                <option value="saldo">Saldo Inicial</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <label class="form-label">Fecha</label>
+                            <input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" name="fechaMovimiento" id="fechaMovimiento">
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-md-9">
+                        
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
+    <div class="col-sm-12 ">
+        <div class="form-group">
+            <input type="text" class="form-control" name="productosBD" id="productosBD" >
+        </div>
+    </div>
+
+    
     <!-- end col -->
 
+
 </div >
-<div class="text-right">
-    <button type="submit" id="regOrden" name="regOrden" class="btn btn-primary">Guardar Orden</button>
-</div>
+
     
 
 </form>
@@ -143,6 +152,10 @@
     <div class="col-lg-12 users-list" data-select2-id="11">
         
         <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Total Factura </h3>
+                <div class="card-options"><h3 id="totalFactura">$</h3> </div>
+            </div>
             <div class="card-body">
                 <div class="user-tabel table-responsive border-top">                  
                     <table class="table card-table table-bordered table-hover table-vcenter text-nowrap">

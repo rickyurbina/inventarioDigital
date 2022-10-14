@@ -16,10 +16,11 @@
 			<div class="table-responsive">
 				<table id="example2" class="hover table-bordered border-top-0 border-bottom-0" style="text-align: center;">
 					<thead>
-						<td>Orden</td>
+						<td>Factura</td>
 						<td>Proveedor</td>
 						<td>Concepto</td>
 						<td>Fecha Registro</td>
+						<td>Monto</td>
 						<td>opciones</td>
 					</thead>
 					<tbody>
@@ -32,10 +33,11 @@
 					</tbody>
 					<tfoot>
 						<tr>
-							<td>Orden</td>
+							<td>Factura</td>
 							<td>Proveedor</td>
 							<td>Concepto</td>
 							<td>Fecha Registro</td>
+							<td>Monto</td>
 							<td>opciones</td>
 						</tr>
 					</tfoot>

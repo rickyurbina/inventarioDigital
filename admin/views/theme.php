@@ -86,11 +86,6 @@ setlocale(LC_ALL,"es_ES");
 								<img src="assets/images/brand/logo.png" class="header-brand-img" alt="Business logo">
 							</a>
 							<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a>
-							<div class="header-navicon">
-								<a href="#" data-toggle="search" class="nav-link d-lg-none navsearch-icon">
-									<i class="fa fa-search"></i>
-								</a>
-							</div>
 
 							<div class="d-flex order-lg-2 ml-auto">
 								<div class="dropdown d-none d-md-flex" >
@@ -137,7 +132,6 @@ setlocale(LC_ALL,"es_ES");
 						<?php 
 							if( $_SESSION["permisos"] == 'administrador' )	include "menuAdmin.php"; 
 							else if ( $_SESSION["permisos"] == 'usuario') include "menu.php";
-						
 						?>
 					</aside>
 				</div>
@@ -147,62 +141,9 @@ setlocale(LC_ALL,"es_ES");
 				<div class="app-content  my-3 my-md-5">
 					<div class="side-app">
 						
-                        <!-- Contenido  -->
-						<?php
-								if($pagina=="inicio" ||
-										$pagina == "salidas" || 
-										$pagina == "salidasAdd" || 
-										$pagina == "salidasList" || 
-										$pagina == "salidasEdita" ||
-										$pagina == "salidasEdit" || 
-										$pagina == "salidaDel" || 
-										$pagina == "entradas" || 
-										$pagina == "entradaAdd" || 
-										$pagina == "entradasList" || 
-										$pagina == "entradasEdit" || 
-										$pagina == "entradaEdit_" || 
-										$pagina == "entradaDel" || 
-										$pagina == "salidas" ||
-										$pagina == "search" ||
-										$pagina == "asistencia" ||
-										$pagina == "mensualidad" ||
-										$pagina == "venta" ||
-										$pagina == "ventaList" ||
-										$pagina == "userEdit" || 
-										$pagina == "userList" || 
-										$pagina == "userAdd" ||
-										$pagina == "userDel" ||
-										$pagina == "proveedorEdit" || 
-										$pagina == "proveedorList" || 
-										$pagina == "proveedorAdd" ||
-										$pagina == "proveedorDel" ||
-										$pagina == "brandAdd" ||
-										$pagina == "brandList" ||
-										$pagina == "brandEdit" ||
-										$pagina == "brandDel" ||
-										$pagina == "eqTypeAdd" ||
-										$pagina == "eqTypeList" ||
-										$pagina == "eqTypeEdit" ||
-										$pagina == "eqTypeDel" ||
-										$pagina == "clientAdd" ||
-										$pagina == "clientDel" ||
-										$pagina == "clientEdit" ||
-										$pagina == "clientList" ||
-										$pagina == "socioAdd" ||
-										$pagina == "socioDel" ||
-										$pagina == "socioEdit" || 
-										$pagina == "socioList" ||
-										$pagina == "productAdd" ||
-										$pagina == "productDel" ||
-										$pagina == "productEdit" || 
-										$pagina == "productList" || 
-										$pagina == "productStatus" ||
-										$pagina == "logOut" ||
-										$pagina == "search" ){
-												include "views/".$pagina.".php";
-								}
+                        <?php
+							include "whiteList.php";
 						?>
-                        <!-- fin de contenido -->
 						
 					</div>
 				</div>

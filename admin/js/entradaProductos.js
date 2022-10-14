@@ -6,6 +6,7 @@ const proveedor = document.querySelector("#proveedor");
 const concepto = document.querySelector("#concepto");
 const fechaMovimiento = document.querySelector("#fechaMovimiento");
 const idProducto = document.querySelector("#idProducto");
+const totalLabel = document.querySelector("#totalFactura");
 
 
 // const lote = document.querySelector("#lote");
@@ -16,6 +17,8 @@ const costo = document.querySelector("#costo");
 const formulario = document.forms['entradas'];
 
 const productsTable = document.querySelector('#productsTable');
+
+let totalFactura = 0;
 
 let productos = [];
 
@@ -59,6 +62,11 @@ function agregaProducto(e){
         medida: nomMedida,
         costo: costo.value
     }
+
+    //Calcular y mostrar el total del pedido 
+    totalFactura = totalFactura + (costo.value * cantidad.value);
+    totalLabel.innerHTML = `$ ${totalFactura}`;
+    //totalPedidoBD.value = totalFactura;
 
     //Añadir al arreglo de productos
     productos = [...productos, productosObj];

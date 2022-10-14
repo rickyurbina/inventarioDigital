@@ -11,7 +11,7 @@ Class Movimientos {
         $fechaMovimiento = date("Y-m-d", $timestamp);
 
         $datos_orden = array ("idProveedor" => $_POST["idProveedor"],
-                                "orden" => $_POST["ordenNum"],
+                                "factura" => $_POST["ordenNum"],
                                 "concepto" => $_POST["concepto"],
                                 "fechaMovimiento" => $fechaMovimiento);
         
@@ -24,7 +24,7 @@ Class Movimientos {
                                 "disponible" => $item["cantidad"],
                                 "medida" => $item["medida"],
                                 "costo" => $item["costo"],
-                                "orden" => $_POST["ordenNum"]);
+                                "factura" => $_POST["ordenNum"]);
           // Mandar llamar el metodo del modelo que inserta los datos en la tabla 
           $ingresa = mdlMovimientos::mdlRegistraProdsOrden($datos_prods);
           // monitorear si hay error al insertar los datos y mostrar mensaje
@@ -226,7 +226,7 @@ Class Movimientos {
       elseif ($tabla == 'entradas') 
       {
         $tablaBuscar = 'entradasEnc';
-        $campo = 'orden';
+        $campo = 'factura';
       }
       
       $ultimo = mdlMovimientos::mdlSiguienteRegistro($tablaBuscar, $campo);
@@ -247,16 +247,17 @@ Class Movimientos {
   
               echo '
               <tr>
-                  <td>'.$item["orden"].'</td>
+                  <td>'.$item["factura"].'</td>
                   <td>'.$item["proveedor"].'</td>                 
-                  <td>'.$item["concepto"].'</td>                  
+                  <td>'.$item["concepto"].'</td>                                
                   <td>'.$registro.'</td>
+                  <td>$</td>
                   <td>
                       <div class="item-action dropdown">
                           <a href="javascript:void(0)" data-toggle="dropdown" class="icon" aria-expanded="false"><i class="fe fe-more-vertical fs-20 text-dark"></i></a>
                           <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-172px, 22px, 0px); top: 0px; left: 0px; will-change: transform;">
-                              <a href="index.php?page=entradasEdit&idEntrada='.$item["orden"].'" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Editar </a>
-                              <a href="index.php?page=entradasList&idBorrar='.$item["orden"].'" class="dropdown-item"><i class="dropdown-icon fe fe-user-x"></i> Borrar </a>
+                              <a href="index.php?page=entradasEdit&idEntrada='.$item["factura"].'" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Editar </a>
+                              <a href="index.php?page=entradasList&idBorrar='.$item["factura"].'" class="dropdown-item"><i class="dropdown-icon fe fe-user-x"></i> Borrar </a>
                           </div>
                       </div>
                   </td>

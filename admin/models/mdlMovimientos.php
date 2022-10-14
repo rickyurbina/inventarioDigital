@@ -36,10 +36,10 @@ class mdlMovimientos {
 
     public static function mdlRegistraOrden($datos_orden){
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO `entradasEnc` ( `orden`, `idProveedor`, `concepto`, `fecha`) 
-        VALUES ( :orden, :idProveedor, :concepto, :fechaMovimiento);");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO `entradasEnc` ( `factura`, `idProveedor`, `concepto`, `fecha`) 
+        VALUES ( :factura, :idProveedor, :concepto, :fechaMovimiento);");
 
-         $stmt -> bindParam(":orden", $datos_orden["orden"], PDO::PARAM_INT);         
+         $stmt -> bindParam(":factura", $datos_orden["factura"], PDO::PARAM_INT);         
          $stmt -> bindParam(":idProveedor", $datos_orden["idProveedor"], PDO::PARAM_INT);
          $stmt -> bindParam(":concepto", $datos_orden["concepto"], PDO::PARAM_STR);
          $stmt -> bindParam(":fechaMovimiento", $datos_orden["fechaMovimiento"], PDO::PARAM_STR);
@@ -84,17 +84,17 @@ class mdlMovimientos {
 
     public static function mdlRegistraProdsOrden($datos_prods){
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO `entradas` (`id`,`idProducto`, `cantidad`, `disponible`, `medida`, `costo`, `orden`) 
-        VALUES (NULL, :idProducto, :cantidad, :disponible, :medida, :costo, :orden);");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO `entradas` (`id`,`idProducto`, `cantidad`, `disponible`, `medida`, `costo`, `factura`) 
+        VALUES (NULL, :idProducto, :cantidad, :disponible, :medida, :costo, :factura);");
         
          $stmt -> bindParam(":idProducto", $datos_prods["idProducto"], PDO::PARAM_INT);
          $stmt -> bindParam(":cantidad", $datos_prods["cantidad"], PDO::PARAM_INT);
          $stmt -> bindParam(":disponible", $datos_prods["disponible"], PDO::PARAM_INT);
          $stmt -> bindParam(":medida", $datos_prods["medida"], PDO::PARAM_STR);
          $stmt -> bindParam(":costo", $datos_prods["costo"], PDO::PARAM_STR);
-         $stmt -> bindParam(":orden", $datos_prods["orden"], PDO::PARAM_INT);
+         $stmt -> bindParam(":factura", $datos_prods["factura"], PDO::PARAM_INT);
 
-         $stmt2 = Conexion::conectar()->prepare("UPDATE productos SET `disponibilidad` = `disponibilidad` + :cantidad, `precioPromedio` = (SELECT AVG(`costo`) FROM `entradas` WHERE `idProducto` = :idProducto) WHERE idProducto = :idProducto");
+         $stmt2 = Conexion::conectar()->prepare("UPDATE productos SET `disponibilidad` = `disponibilidad` + :cantidad, `costoPromedio` = (SELECT AVG(`costo`) FROM `entradas` WHERE `idProducto` = :idProducto) WHERE idProducto = :idProducto");
          $stmt2 -> bindParam(":idProducto", $datos_prods["idProducto"], PDO::PARAM_INT);
          $stmt2 -> bindParam(":cantidad", $datos_prods["cantidad"], PDO::PARAM_INT);
          
