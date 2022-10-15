@@ -3,10 +3,32 @@ const productsTable = document.querySelector("#productsTable");
 const listaPedido = document.querySelector("#listaPedido");
 const totalLabel = document.querySelector("#totalPedido");
 const totalPedidoBD = document.querySelector("#totalPedidoBD");
+const tablaResultados = document.querySelector('#tablaResultados');
+
+
+tablaResultados.style.display = "none";
 
 let listaProds = [];
 let pedido = [];
 let totalPedido = 0;
+
+//Asignamos la fecha de hoy al datepicker del formulario
+$(document).ready(function() {
+  var date = new Date();
+  var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+  $('#fechaMovimiento').datepicker({
+      format: 'dd-mm-yyyy',
+      orientation: 'bottom'
+  });
+
+  $('#fechaMovimiento').datepicker('setDate', today);
+
+});
+
+
+
+
 
 function buscaJS(name) {
   if( name != "" ){
@@ -14,6 +36,7 @@ function buscaJS(name) {
   }
   else{
     limpiarTablaResultados();
+
   }
 }
 
@@ -44,7 +67,7 @@ function liveUpdate(id, cantidad){
 function viewSearchResult(data){
    const lista = Object.entries(data).length;
 
-  limpiarTablaResultados();
+  // limpiarTablaResultados();
   listaProds = [];
   for (let i = 0; i < lista; i++){
       const productoObj ={
@@ -57,7 +80,7 @@ function viewSearchResult(data){
         medida: data[i]["medida"]
       }
 
-    // //Añadir al arreglo de features
+    // //Añadir al arreglo de productos
     listaProds = [...listaProds, productoObj];
   
    } //for
@@ -66,11 +89,14 @@ function viewSearchResult(data){
 }
 
 function creaOpciones(){
-  //console.log(listaProds);
+  limpiarTablaResultados();
+  //console.log('Creando Opciones');
+  
+  tablaResultados.style.display = "table";
   if (listaProds.length > 0){
     listaProds.forEach( ft =>{
       ///   crea los elementos necesarios para la tabla de resultados del LiveSearch
-      console.log(ft);
+      //console.log(ft);
 
       let renglon = document.createElement("tr");
       let btnColumn = document.createElement("td");
@@ -97,7 +123,7 @@ function creaOpciones(){
       btnAgrearAPedido.onclick = () => {
         let cantidad = document.querySelector("#cant"+ft.id).value;
         agregarProductoLista(ft, cantidad); 
-        liveUpdate(ft.id, cantidad);
+        //liveUpdate(ft.id, cantidad);
       }
 
 
@@ -120,9 +146,11 @@ function creaOpciones(){
 
 
 function limpiarTablaResultados(){
+  //console.log('Limpiar Tabla Resultados');
   while(productsTable.firstChild){
     productsTable.removeChild(productsTable.firstChild);
   }
+  tablaResultados.style.display = "none";
 }
 
 function agregarProductoLista(producto, nuevaCantidad){
@@ -139,6 +167,7 @@ function agregarProductoLista(producto, nuevaCantidad){
 
 function creaListaPedido(){
   limpiarTablaPedidos();
+  limpiarTablaResultados();
   if (pedido.length > 0){
     
     pedido.forEach( prod =>{
@@ -172,16 +201,16 @@ function creaListaPedido(){
       listaPedido.appendChild(renglon);
     });
   }
-  limpiarTablaResultados();
-  sincronizarStorage();
-  document.getElementById("searchBox").focus();
   
+  sincronizarStorage();
+  document.getElementById("searchBox").focus();  
 }
 
 function limpiarTablaPedidos(){
   while(listaPedido.firstChild){
     listaPedido.removeChild(listaPedido.firstChild);
   }
+  tablaResultados.style.display = "none";
 }
 
 function eliminarProductoPedido(id){
