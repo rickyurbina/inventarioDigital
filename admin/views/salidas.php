@@ -12,7 +12,7 @@
                 <div class="card-body ">
                     <form method="POST">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="searchCode" oninput = "buscaJS(this.value)" placeholder="Codigo Barras">
+                            <input type="text" class="form-control" id="searchCode" onchange = "buscaCodigo(this.value)" placeholder="Codigo Barras">
                         </div>
                     </form>
                 </div>
@@ -111,7 +111,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
-                                        <button type="submit" class="btn btn-sm btn-blue col-12" name="regPedido">Cobrar</button>
+                                    <!-- <button type="" class="btn btn-sm btn-blue col-12" name="regPedido">Cobrar</button> -->
                                 </div>
                             </div>
                         </div>

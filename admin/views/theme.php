@@ -344,7 +344,11 @@ setlocale(LC_ALL,"es_ES");
 			// }
 			// if ($pagina == "salidasEdit") echo '<script src="js/salidaEditProductos.js"></script>';
 			if ($pagina == "salidasEdit") echo '<script src="js/salidasEdit.js"></script>';
-			if ($pagina == "salidas") echo '<script src="js/search.js"></script>';
+			if ($pagina == "salidas")
+			{
+				echo '<script src="js/search.js"></script>';	
+				echo '<script src="js/buscaCodigo.js"></script>';	
+			} 
 		?>
 
 	</body>

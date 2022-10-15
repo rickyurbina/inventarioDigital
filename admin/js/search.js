@@ -65,6 +65,7 @@ function liveUpdate(id, cantidad){
 
 
 function viewSearchResult(data){
+  console.log(data);
    const lista = Object.entries(data).length;
 
   // limpiarTablaResultados();
