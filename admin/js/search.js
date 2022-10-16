@@ -4,12 +4,18 @@ const listaPedido = document.querySelector("#listaPedido");
 const totalLabel = document.querySelector("#totalPedido");
 const totalPedidoBD = document.querySelector("#totalPedidoBD");
 const tablaResultados = document.querySelector('#tablaResultados');
+const cajaCodigoBarras = document.querySelector('#searchCode');
+const cajaBusquedaProducto = document.querySelector('#searchBox');
+const cajaDescuento = document.querySelector('#descuento');
+const cajaValorDescuento = document.querySelector('#valorDescuento');
+const cajaTotalNeto = document.querySelector('#pedidoNeto');
+const btnCobrar = document.querySelector('#btnCobrar');
 
-
+btnCobrar.disabled = true;
 tablaResultados.style.display = "none";
 
-let listaProds = [];
-let pedido = [];
+let listaProds = []; // opciones despues de busqueda por nombre
+let pedido = [];  // total de articulos de la compra
 let totalPedido = 0;
 
 //Asignamos la fecha de hoy al datepicker del formulario
@@ -25,9 +31,6 @@ $(document).ready(function() {
   $('#fechaMovimiento').datepicker('setDate', today);
 
 });
-
-
-
 
 
 function buscaJS(name) {
@@ -51,24 +54,65 @@ function fetchSearchData(name){
     .catch(e => console.error('Error: ' + e))
 }
 
-function liveUpdate(id, cantidad){
-  productoUpdate = pedido.filter(prod => prod.id === id);
 
-  fetch('views/liveUpdate.php', { // ubicacion del archivo que hace la consulta segun el nombre
-      method: "POST",            // que le enviamos por metodo POST
-      body: new URLSearchParams('productoUpdate=' + productoUpdate)
-  })
-  .then(res => res)
-  .then(res => viewSearchResult(res))
-  .catch(e => console.error('Error: ' + e))
+//busca codigo de barras   ================================================================================================
+function buscaCodigo(name){
+  if (name !== ''){
+      fetch('views/codeSearch.php', { // ubicacion del archivo que hace la consulta segun el nombre
+          method: "POST",            // que le enviamos por metodo POST
+          body: new URLSearchParams('name=' + name)
+      })
+      .then(res => res.json())
+      .then(res => verCodigos(res))
+      .catch(e => console.error('Error: ' + e))
+    }
+  }
+  
+
+
+function verCodigos(data){
+  //  console.log(data[0]);
+  const cantidad = 1;
+  const cantProductos = pedido.length;
+  // console.log(pedido);
+  // console.log(cantProductos);
+  let agrega = true;
+
+  if (cantProductos > 0 ){
+    for (const i of pedido) {
+      if (i.idProducto == data[0]["idProducto"]) 
+      {
+        i.cantidad = i.cantidad + 1;
+        agrega = false;
+        totalPedido = totalPedido + (data[0]["dayPrice"]);
+        totalLabel.innerHTML = `$ ${totalPedido}`;
+        totalPedidoBD.value = totalPedido;
+        cajaDescuento.value=0;
+        calculaDescuento(0);
+        botonCobrar();
+      }
+    }
+  } 
+  
+  if (agrega){
+    const productoObj ={
+      id: Date.now(),
+      idProducto: data[0]["idProducto"],
+      nombre: data[0]["name"],
+      disponible: data[0]["disponibilidad"],
+      precio: data[0]["dayPrice"],
+      cantidad: 1 ,
+      medida: data[0]["medida"]
+    }
+    agregarProductoLista(productoObj, cantidad);    
+  }
+  creaListaPedido(); 
+
 }
-
-
+//=========================================================================================================================
 function viewSearchResult(data){
-  console.log(data);
    const lista = Object.entries(data).length;
 
-  // limpiarTablaResultados();
   listaProds = [];
   for (let i = 0; i < lista; i++){
       const productoObj ={
@@ -81,23 +125,19 @@ function viewSearchResult(data){
         medida: data[i]["medida"]
       }
 
-    // //Añadir al arreglo de productos
     listaProds = [...listaProds, productoObj];
   
-   } //for
+   }
    creaOpciones();
 
 }
 
 function creaOpciones(){
   limpiarTablaResultados();
-  //console.log('Creando Opciones');
   
   tablaResultados.style.display = "table";
   if (listaProds.length > 0){
     listaProds.forEach( ft =>{
-      ///   crea los elementos necesarios para la tabla de resultados del LiveSearch
-      //console.log(ft);
 
       let renglon = document.createElement("tr");
       let btnColumn = document.createElement("td");
@@ -107,7 +147,7 @@ function creaOpciones(){
       inputField.setAttribute('id', "cant"+ft.id);
       inputField.setAttribute('min', 1);
       inputField.setAttribute('max', ft.disponible);
-      inputField.setAttribute('value', 0);
+      inputField.setAttribute('value', 1);
 
 
       inputColumn.appendChild(inputField);
@@ -123,7 +163,12 @@ function creaOpciones(){
       //añadimos la funcion de eliminar
       btnAgrearAPedido.onclick = () => {
         let cantidad = document.querySelector("#cant"+ft.id).value;
-        agregarProductoLista(ft, cantidad); 
+
+        if (cantidad < 1){
+          mostrarError('La cantidad es incorrecta');
+          return
+        }
+        else agregarProductoLista(ft, cantidad); 
         //liveUpdate(ft.id, cantidad);
       }
 
@@ -147,12 +192,12 @@ function creaOpciones(){
 
 
 function limpiarTablaResultados(){
-  //console.log('Limpiar Tabla Resultados');
   while(productsTable.firstChild){
     productsTable.removeChild(productsTable.firstChild);
   }
   tablaResultados.style.display = "none";
 }
+
 
 function agregarProductoLista(producto, nuevaCantidad){
 
@@ -160,6 +205,9 @@ function agregarProductoLista(producto, nuevaCantidad){
   totalPedido = totalPedido + (producto.precio * nuevaCantidad);
   totalLabel.innerHTML = `$ ${totalPedido}`;
   totalPedidoBD.value = totalPedido;
+  cajaDescuento.value=0;
+  calculaDescuento(0);
+  botonCobrar();
 
   producto.cantidad = nuevaCantidad;
   pedido = [...pedido, producto];
@@ -195,16 +243,14 @@ function creaListaPedido(){
         <td id="cant-${prod.id}">${prod.cantidad}</td>
       `;
 
-      //renglon.appendChild(inputColumn);
       renglon.appendChild(btnColumn);
-      
-      // Agregar los datos del producto correspondiente a la tabla de lista de pedido
       listaPedido.appendChild(renglon);
     });
   }
   
   sincronizarStorage();
-  document.getElementById("searchBox").focus();  
+  cajaCodigoBarras.value = '';
+  cajaCodigoBarras.focus();
 }
 
 function limpiarTablaPedidos(){
@@ -212,6 +258,7 @@ function limpiarTablaPedidos(){
     listaPedido.removeChild(listaPedido.firstChild);
   }
   tablaResultados.style.display = "none";
+  cajaBusquedaProducto.value = '';
 }
 
 function eliminarProductoPedido(id){
@@ -219,11 +266,11 @@ function eliminarProductoPedido(id){
   const cantEliminar =   document.querySelector("#cant-"+id).textContent;
   totalPedido = totalPedido - (parseInt(precioEliminar)* parseInt(cantEliminar));
 
-  //Calcular y mostrar el total del pedido 
-  // totalPedido = totalPedido - (precioEliminar * cantEliminar);
-  // console.log(precioEliminar +" * "+ cantEliminar + " = " + totalPedido)
   totalLabel.innerHTML = `$ ${totalPedido}`;
   totalPedidoBD.value = totalPedido;
+  cajaDescuento.value=0;
+  calculaDescuento(0);
+  botonCobrar();
 
   pedido = pedido.filter(prod => prod.id !== id);
   creaListaPedido();
@@ -234,4 +281,43 @@ function sincronizarStorage(){
   localStorage.setItem('pedido', JSON.stringify(pedido));
     // actualizamos el la caja de texto todas las features para ser insertadas en la BD
     pedidoBD.value = JSON.stringify(pedido);
+}
+
+function mostrarError(error){
+  const mensajeError = document.createElement('div');
+  mensajeError.classList.add('alert','alert-primary', 'text-center', )
+  mensajeError.textContent = error;
+
+  //mensajeError.classList.add('');
+
+  // Insertar el contenido
+  const contenido = document.querySelector('#error');
+  contenido.appendChild(mensajeError);
+
+  setTimeout(()=>{
+      mensajeError.remove();
+  }, 3000);
+
+}
+
+function calculaDescuento(descuento){
+  if (descuento>=0 && descuento < 100) 
+  {
+    let valorDescuento = totalPedido * parseInt(descuento)/100;
+    let totalNeto = totalPedido - valorDescuento;
+
+    cajaTotalNeto.value = totalNeto;
+    cajaValorDescuento.value = valorDescuento;
+    totalLabel.innerHTML = `$ ${totalNeto}`;
+    totalPedidoBD.value = totalPedido;
+  }
+  else
+  {
+    cajaDescuento.value = 0;
+  }
+}
+
+function botonCobrar(){
+  if(totalPedido>0) btnCobrar.disabled = false;
+  else btnCobrar.disabled = true;
 }

@@ -36,13 +36,14 @@ class mdlSalidas {
 
     public static function mdlRegistraPedido($datos_pedido){
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO `salidasEnc` (`id`, `idCliente`, `fecha`, `pedido`, `totalPedido`) 
-        VALUES (NULL, :idCliente, :fechaMovimiento, :pedido, :totalPedido);");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO `salidasEnc` (`id`, `idCliente`, `fecha`, `pedido`, `totalPedido`, `descuento`, `totalNeto`) 
+        VALUES (NULL, :idCliente, :fechaMovimiento, :pedido, :totalPedido, :valorDescuento, :pedidoNeto);");
 
          $stmt -> bindParam(":pedido", $datos_pedido["pedido"], PDO::PARAM_INT);         
          $stmt -> bindParam(":idCliente", $datos_pedido["idCliente"], PDO::PARAM_INT);
          $stmt -> bindParam(":totalPedido", $datos_pedido["totalPedido"], PDO::PARAM_INT);
-        //  $stmt -> bindParam(":concepto", $datos_pedido["concepto"], PDO::PARAM_STR);
+         $stmt -> bindParam(":valorDescuento", $datos_pedido["valorDescuento"], PDO::PARAM_INT);
+         $stmt -> bindParam(":pedidoNeto", $datos_pedido["pedidoNeto"], PDO::PARAM_INT);
          $stmt -> bindParam(":fechaMovimiento", $datos_pedido["fechaMovimiento"], PDO::PARAM_STR);
         //  $stmt2 = Conexion::conectar()->prepare("UPDATE productos SET disponibilidad = (SELECT SUM(`cantidad`) FROM `entradas` WHERE `idProducto`= :idProducto) WHERE idProducto = :idProducto");
         //  $stmt2 -> bindParam(":idProducto", $datos["idProducto"], PDO::PARAM_INT);

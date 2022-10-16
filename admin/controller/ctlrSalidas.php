@@ -14,6 +14,8 @@ Class Salidas {
                                 "pedido" => $_POST["pedidoNum"],
                                 "concepto" => $_POST["concepto"],
                                 "totalPedido" => $_POST["totalPedidoBD"],
+                                "valorDescuento" => $_POST["valorDescuento"],
+                                "pedidoNeto" => $_POST["pedidoNeto"],
                                 "fechaMovimiento" => $fechaMovimiento);
         
         $ingresa = mdlSalidas::mdlRegistraPedido($datos_pedido);

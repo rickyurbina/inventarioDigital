@@ -41,6 +41,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <div id="error"></div>
                 </div>
             </div>
         </div>
@@ -85,11 +86,10 @@
                             <div class="form-group">
                                 <label class="form-label">Cliente</label>
                                 <select class="form-control mb-5" name="idCliente" id="idCliente">
-                                    <option value="0">Publico en General</option>
                                     <?php $clientes = new clientes(); $clientes -> ctlListClientes();?>
                                 </select>
-                                <label class="form-label">Descuento Adicional (%)</label>
-                                <input type="text" class="form-control mb-5" name="descuento" id="descuento" value="0">
+                                <label class="form-label">Descuento General (%)</label>
+                                <input type="text" class="form-control mb-5" name="descuento" id="descuento" value="0" onchange = "calculaDescuento(this.value)">
                                 
                                 <label class="form-label">Pago con :</label>
                                 <select class="form-control" name="tipoPago" id="idCliente">
@@ -103,6 +103,8 @@
                                 <input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" name="fechaMovimiento" id="fechaMovimiento" hidden>
                                 <input type="text" class="form-control" name="pedidoBD" id="pedidoBD" hidden>
                                 <input type="text" class="form-control" name="totalPedidoBD" id="totalPedidoBD" hidden>
+                                <input type="text" class="form-control" name="valorDescuento" id="valorDescuento" hidden>
+                                <input type="text" class="form-control" name="pedidoNeto" id="pedidoNeto" hidden>
 
                             </div>
                         </div>
@@ -111,7 +113,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <!-- <button type="" class="btn btn-sm btn-blue col-12" name="regPedido">Cobrar</button> -->
+                                    <button type="submit" class="btn btn-sm btn-blue col-12" id="btnCobrar" name="regPedido">Cobrar</button>
                                 </div>
                             </div>
                         </div>

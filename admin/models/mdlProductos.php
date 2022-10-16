@@ -186,15 +186,10 @@ class mdlProductos {
 
 	public function mdlCodeSearch($codigo){
 
-		$stmt = Conexion::conectar()->prepare("SELECT * FROM productos WHERE `claveProducto` = 't-01'");
-		// $stmt = Conexion::conectar()->prepare("SELECT e.*, p.name, p.idProducto, p.dayPrice, p.weekPrice, p.monthPrice 
-		// 										FROM entradas AS e
-		// 										INNER JOIN productos AS p
-		// 										ON e.idProducto = p.idProducto WHERE (p.name LIKE :nombres OR p.claveProducto LIKE :nombres) 
-		// 										AND (e.disponible > 0)");
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM `productos` WHERE `claveProducto` LIKE :codigo ");
 		
-		//$stmt -> execute(["codigo" => "%" . $codigo . "%"]); Para implementar el LIKE en la consulta
-		$stmt -> bindPARAM(":codigo", $codigo, PDO::PARAM_STR);
+		$stmt -> execute(["codigo" => "%" . $codigo . "%"]); //Para implementar el LIKE en la consulta
+		//$stmt -> bindPARAM(":codigo", $codigo, PDO::PARAM_STR);
 		return $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
 	}

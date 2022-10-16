@@ -347,7 +347,6 @@ setlocale(LC_ALL,"es_ES");
 			if ($pagina == "salidas")
 			{
 				echo '<script src="js/search.js"></script>';	
-				echo '<script src="js/buscaCodigo.js"></script>';	
 			} 
 		?>
 
