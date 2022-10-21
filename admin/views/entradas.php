@@ -32,7 +32,7 @@
                             <th style="width: 40.406px;">Cant</th>
                             <th></th>
                         </thead>
-                        <tbody class="text-left" id="productsTable">             
+                        <tbody class="text-left" id="productsSearch">             
                         </tbody>
                     </table>
                 </div>
@@ -81,7 +81,7 @@
                             </select> -->
                         </div>
                         <div class="form-group">
-                            <button type="submit" id="regOrden" name="regOrden" class="btn btn-secondary col-12">Guardar Orden</button><br><br>
+                            <button type="button" id="regOrden" name="regOrden" class="btn btn-secondary col-12">Guardar Orden</button><br><br>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,8 @@
 
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
         <div class="form-group">
-            <input type="text" class="form-control" name="productosBD" id="productosBD" >
+            <input type="text" class="form-control" name="productosBD" id="productosBD" placeholder="productosBD" >
+            <input type="text" class="form-control" name="totalPedidoBD" id="totalPedidoBD" placeholder="totalPedidoBD" >
         </div>
         <div class="card">
             <div class="card-header">

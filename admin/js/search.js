@@ -268,9 +268,9 @@ function eliminarProductoPedido(id){
 
   totalLabel.innerHTML = `$ ${totalPedido}`;
   totalPedidoBD.value = totalPedido;
-  cajaDescuento.value=0;
-  calculaDescuento(0);
-  botonCobrar();
+  // cajaDescuento.value=0;
+  // calculaDescuento(0);
+  // botonCobrar();
 
   pedido = pedido.filter(prod => prod.id !== id);
   creaListaPedido();
