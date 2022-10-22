@@ -1,11 +1,6 @@
 
 //variables
-const btnAgrega = document.querySelector("#agregaProductoLista");
-const orden = document.getElementById("ordenNum");
-const proveedor = document.querySelector("#proveedor");
-const concepto = document.querySelector("#concepto");
 const fechaMovimiento = document.querySelector("#fechaMovimiento");
-const idProducto = document.querySelector("#idProducto");
 const totalLabel = document.querySelector("#totalFactura");
 const totalPedidoBD = document.querySelector('#totalPedidoBD');
 const productosBD = document.querySelector('#productosBD');
@@ -21,10 +16,7 @@ let productos = [];
 //Event Listeners
 eventListeners();
 
-function eventListeners(){
-    //cuando el usuario agrega un feature
-    //btnAgrega.addEventListener('click', agregaProducto);
-    
+function eventListeners(){    
     // cuando el documento esta listo despues de recargar
     // si el localStorege no se encuentra entonces inicializa con un arreglo vacio
     document.addEventListener('DOMContentLoaded', ()=>{
@@ -67,7 +59,6 @@ function buscaJS(name) {
 
   function viewSearchResult(data){
     const lista = Object.entries(data).length;
-
     prodsResult = [];
    for (let i = 0; i < lista; i++){
        const productoObj ={
@@ -75,7 +66,7 @@ function buscaJS(name) {
          idProducto: data[i]["idProducto"],
          nombre: data[i]["name"],
          disponible: data[i]["disponible"],
-         precio: data[i]["dayPrice"],
+         costo: data[i]["dayPrice"],
          cantidad: 0,
          medida: data[i]["medida"]
        }
@@ -115,21 +106,17 @@ function buscaJS(name) {
   
         //añadimos la funcion de eliminar
         btnAgrearAPedido.onclick = () => {
-          let cantidad = document.querySelector("#cant"+ft.id).value;
-          let disponible = document.querySelector("#disp"+ft.id).value;
-          console.log(cantidad);
-          console.log(disponible);
+
+          let cantidad = Number(document.querySelector("#cant"+ft.id).value);
+          let disponible = Number(document.querySelector("#disp-"+ft.id).innerText);
   
           if ( cantidad < 1 || cantidad > disponible ){
-            console.log('error');
-            // mostrarError('La cantidad es incorrecta');
-            //return
+            mostrarError('La cantidad es incorrecta');
+            return
           }
           else {
-            console.log(cantidad);
-            //agregarProductoLista(ft, cantidad); 
+            agregarProductoLista(ft, cantidad); 
           }
-          //liveUpdate(ft.id, cantidad);
         }
   
   
@@ -137,8 +124,8 @@ function buscaJS(name) {
   
         renglon.innerHTML = `
           <td>${ft.nombre}</td>
-          <td id="disp${ft.id}">${ft.disponible}</td>
-          <td>${ft.precio}</td>
+          <td id="disp-${ft.id}">${ft.disponible}</td>
+          <td>${ft.costo}</td>
         `;
   
         renglon.appendChild(inputColumn);
@@ -166,9 +153,8 @@ function buscaJS(name) {
   }
 
   function agregarProductoLista(productoAdd, nuevaCantidad){
-    console.log(productoAdd);
     //Calcular y mostrar el total del pedido 
-    totalPedido = totalPedido + (productoAdd.precio * nuevaCantidad);
+    totalPedido = totalPedido + (productoAdd.costo * nuevaCantidad);
     totalLabel.innerHTML = `$ ${totalPedido}`;
     totalPedidoBD.value = totalPedido;
     // cajaDescuento.value=0;
@@ -205,8 +191,8 @@ function buscaJS(name) {
   
         renglon.innerHTML = `
           <td>${prod.nombre}</td>
-          <td id="precio-${prod.id}">${prod.precio}</td>
           <td id="cant-${prod.id}">${prod.cantidad}</td>
+          <td id="costo-${prod.id}">${prod.costo}</td>
         `;
   
         renglon.appendChild(btnColumn);
@@ -221,16 +207,14 @@ function buscaJS(name) {
 
   function sincronizarStorage(){
     localStorage.setItem('productos', JSON.stringify(productos));
-    // actualizamos el la caja de texto todas las features para ser insertadas en la BD
-    // document.querySelector('#featuresBD').value = features;
     productosBD.value = JSON.stringify(productos);
 }
 
 
 function eliminarProductoPedido(id){
-    const precioEliminar = document.querySelector("#precio-"+id).textContent;
+    const costoEliminar = document.querySelector("#costo-"+id).textContent;
     const cantEliminar =   document.querySelector("#cant-"+id).textContent;
-    totalPedido = totalPedido - (parseInt(precioEliminar)* parseInt(cantEliminar));
+    totalPedido = totalPedido - (parseInt(costoEliminar)* parseInt(cantEliminar));
   
     totalLabel.innerHTML = `$ ${totalPedido}`;
     totalPedidoBD.value = totalPedido;
@@ -243,18 +227,17 @@ function eliminarProductoPedido(id){
   }
 
   function mostrarError(error){
-    console.log('Error');
-    // const mensajeError = document.createElement('div');
-    // mensajeError.classList.add('alert','alert-primary', 'text-center', )
-    // mensajeError.textContent = error;
+    const mensajeError = document.createElement('div');
+    mensajeError.classList.add('alert','alert-primary', 'text-center', )
+    mensajeError.textContent = error;
 
-    // // Insertar el contenido
-    // const contenido = document.querySelector('#error');
-    // contenido.appendChild(mensajeError);
+    // Insertar el contenido
+    const contenido = document.querySelector('#error');
+    contenido.appendChild(mensajeError);
   
-    // setTimeout(()=>{
-    //     mensajeError.remove();
-    // }, 3000);
+    setTimeout(()=>{
+        mensajeError.remove();
+    }, 3000);
   
   }
 

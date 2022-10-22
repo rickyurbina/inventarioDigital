@@ -142,7 +142,7 @@ class mdlProductos {
 		$stmt = Conexion::conectar()->prepare("SELECT e.*, p.name as producto
 												FROM entradas AS e
 												INNER JOIN productos AS p
-												ON e.idProducto = p.idProducto WHERE orden = $orden");
+												ON e.idProducto = p.idProducto WHERE e.factura = $orden");
 		$stmt->execute();
         while($row=$stmt->fetchAll(PDO::FETCH_ASSOC)){
 			$prodsArray = $row;

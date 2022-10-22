@@ -15,7 +15,7 @@ btnCobrar.disabled = true;
 tablaResultados.style.display = "none";
 
 let listaProds = []; // opciones despues de busqueda por nombre
-let pedido = [];  // total de articulos de la compra
+let pedido = [];  // total de articulos de la venta
 let totalPedido = 0;
 
 //Asignamos la fecha de hoy al datepicker del formulario

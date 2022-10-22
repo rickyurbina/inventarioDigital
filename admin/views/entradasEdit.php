@@ -23,8 +23,8 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label class="form-label text-center"># Orden</label>
-                            <h3 class="text-center"><strong> <?php echo $busca['orden']; ?></strong></h3>
-                            <input type="text" class="form-control" name="ordenNum" id="ordenNum" value="<?php echo $busca["orden"] ?>" hidden>
+                            <h3 class="text-center"><strong> <?php echo $busca['factura']; ?></strong></h3>
+                            <input type="text" class="form-control" name="ordenNum" id="ordenNum" value="<?php echo $busca["factura"] ?>" hidden>
                         </div>
                     </div>
                     <div class="col-sm-4 col-md-4">

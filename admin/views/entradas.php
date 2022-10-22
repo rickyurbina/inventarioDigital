@@ -2,15 +2,9 @@
     $orden = new Movimientos(); 
     $siguiente = $orden -> ctrSiguienteRegistro('entradas'); 
 ?>
-<!-- <div class="page-header">
-    <h4 class="page-title">Registro de Productos</h4>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Products Admin</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Products Register</li>
-    </ol>
-</div> -->
+
 <br>
-<form method="POST" name="entradas">
+
 
 <div class="row">
 
@@ -41,6 +35,7 @@
         </div>
 
         <div class="card m-b-20">
+            
             <div class="card-header">
                 <h3 class="card-title">Proveedor </h3>
                 <div class="card-options">
@@ -48,6 +43,7 @@
                 </div>
             </div>
             <div class="card-body">
+                <form method="POST" name="entradas">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -81,78 +77,27 @@
                             </select> -->
                         </div>
                         <div class="form-group">
-                            <button type="button" id="regOrden" name="regOrden" class="btn btn-secondary col-12">Guardar Orden</button><br><br>
+                            <input type="text" class="form-control" name="productosBD" id="productosBD" placeholder="productosBD" >
+                            <input type="text" class="form-control" name="totalPedidoBD" id="totalPedidoBD" placeholder="totalPedidoBD" >
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="regOrden" name="regOrden" class="btn btn-secondary col-12">Guardar Orden</button><br><br>
                         </div>
                     </div>
                 </div>
+                </form>
+                <?php
+                    $registro = new Movimientos();
+                    $registro -> ctlRegistraOrden();                
+                ?>
             </div>
+
+            
+
         </div>
     </div>
-    
-
-    <!-- <div class="col-xl-4">
-        <div class="card m-b-20">
-            <div class="card-header">
-                <h3 class="card-title">Producto</h3>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                <div class="col-sm-3 col-md-3">
-                        <div class="form-group">
-                            <label class="form-label">Clave Producto</label>
-                            <input type="text" class="form-control" name="clave" id="clave">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <label class="form-label">Producto</label>
-                            <select class="form-control" name="idProducto" id="idProducto">
-                                <?php $productos = new productos(); $productos -> ctlListProductos();?>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3 col-md-3">
-                        <div class="form-group">
-                            <label class="form-label">Cantidad</label>
-                            <input type="number" class="form-control" name="cantidad" id="cantidad" placeholder="" >
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3 col-md-3">
-                        <div class="form-group">
-                            <label class="form-label">Medida</label>
-                            <select class="form-control custom-select select2" name="medida" id="medida" >
-                                <option value="Kgs">Kgs</option>
-                                <option value="Pzas">Piezas</option>
-                                
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3 col-md-3">
-                        <div class="form-group">
-                            <label class="form-label">Costo Unitario</label>
-                            <input type="text" class="form-control" name="costo" placeholder="" id="costo" >
-                        </div>
-                    </div>
-                    <div class="col-sm-3 col-md-3">
-                        <label class="form-label">Agregar</label>   
-                        <a href="" type="" id="agregaProductoLista" class="btn btn-success">+</a>
-                    </div>
-                    <div id="error"></div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    
-
 
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-7">
-        <div class="form-group">
-            <input type="text" class="form-control" name="productosBD" id="productosBD" placeholder="productosBD" >
-            <input type="text" class="form-control" name="totalPedidoBD" id="totalPedidoBD" placeholder="totalPedidoBD" >
-        </div>
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Total Factura </h3>
@@ -173,29 +118,10 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    
-    <!-- end col -->
+</div>
 
 
 </div >
 
-    
 
-</form>
-
-<div class="row" data-select2-id="12">
-    <div class="col-lg-12 users-list" data-select2-id="11">
-        
-        
-
-    </div>
-</div>
-
-<?php
-    $registro = new Movimientos();
-    $registro -> ctlRegistraOrden();
-    
-?>
 

@@ -36,12 +36,13 @@ class mdlMovimientos {
 
     public static function mdlRegistraOrden($datos_orden){
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO `entradasEnc` ( `factura`, `idProveedor`, `concepto`, `fecha`) 
-        VALUES ( :factura, :idProveedor, :concepto, :fechaMovimiento);");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO `entradasEnc` ( `factura`, `idProveedor`, `concepto`, `fecha`, `totalFactura`) 
+        VALUES ( :factura, :idProveedor, :concepto, :fechaMovimiento, :totalPedidoBD);");
 
          $stmt -> bindParam(":factura", $datos_orden["factura"], PDO::PARAM_INT);         
          $stmt -> bindParam(":idProveedor", $datos_orden["idProveedor"], PDO::PARAM_INT);
          $stmt -> bindParam(":concepto", $datos_orden["concepto"], PDO::PARAM_STR);
+         $stmt -> bindParam(":totalPedidoBD", $datos_orden["totalPedidoBD"], PDO::PARAM_INT);
          $stmt -> bindParam(":fechaMovimiento", $datos_orden["fechaMovimiento"], PDO::PARAM_STR);
         //  $stmt2 = Conexion::conectar()->prepare("UPDATE productos SET disponibilidad = (SELECT SUM(`cantidad`) FROM `entradas` WHERE `idProducto`= :idProducto) WHERE idProducto = :idProducto");
         //  $stmt2 -> bindParam(":idProducto", $datos["idProducto"], PDO::PARAM_INT);
@@ -150,7 +151,7 @@ class mdlMovimientos {
 
 	public static function mdlBuscaEntrada($entrada, $tabla){
 
-		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE orden = :id");
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE factura = :id");
 
 		$stmt->bindParam(":id", $entrada, PDO::PARAM_INT);
 

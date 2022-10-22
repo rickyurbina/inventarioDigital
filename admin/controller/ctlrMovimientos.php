@@ -13,6 +13,7 @@ Class Movimientos {
         $datos_orden = array ("idProveedor" => $_POST["idProveedor"],
                                 "factura" => $_POST["ordenNum"],
                                 "concepto" => $_POST["concepto"],
+                                "totalPedidoBD" => $_POST["totalPedidoBD"],
                                 "fechaMovimiento" => $fechaMovimiento);
         
         $ingresa = mdlMovimientos::mdlRegistraOrden($datos_orden);
