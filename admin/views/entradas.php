@@ -77,11 +77,11 @@
                             </select> -->
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="productosBD" id="productosBD" placeholder="productosBD" >
-                            <input type="text" class="form-control" name="totalPedidoBD" id="totalPedidoBD" placeholder="totalPedidoBD" >
+                            <input type="text" class="form-control" name="productosBD" id="productosBD" placeholder="productosBD" hidden >
+                            <input type="text" class="form-control" name="totalPedidoBD" id="totalPedidoBD" placeholder="totalPedidoBD" hidden >
                         </div>
                         <div class="form-group">
-                            <button type="submit" id="regOrden" name="regOrden" class="btn btn-secondary col-12">Guardar Orden</button><br><br>
+                            <button type="submit" id="btnGuardar" name="regOrden" class="btn btn-secondary col-12">Guardar</button><br><br>
                         </div>
                     </div>
                 </div>

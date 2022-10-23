@@ -168,21 +168,25 @@ class mdlProductos {
         return json_encode($prodsArray);
 	}
 
-
+	#	----------------------------------------------------------------------------------------
+	#	Busca productos para el modulo de ventas, revisando la existencia
+	# 	----------------------------------------------------------------------------------------
 	public function mdlLiveSearch($nombres){
 
-		//$stmt = Conexion::conectar()->prepare("SELECT * FROM productos WHERE name LIKE :nombres OR claveProducto LIKE :nombres");
-		$stmt = Conexion::conectar()->prepare("SELECT e.*, p.name, p.idProducto, p.dayPrice, p.weekPrice, p.monthPrice 
-												FROM entradas AS e
-												INNER JOIN productos AS p
-												ON e.idProducto = p.idProducto WHERE (p.name LIKE :nombres OR p.claveProducto LIKE :nombres) 
-												AND (e.disponible > 0)");
+		$stmt = Conexion::conectar()->prepare("SELECT * FROM productos WHERE disponibilidad > 0 AND name LIKE :nombres OR claveProducto LIKE :nombres");
+		// $stmt = Conexion::conectar()->prepare("SELECT e.*, p.name, p.idProducto, p.dayPrice, p.weekPrice, p.monthPrice 
+		// 										FROM entradas AS e
+		// 										INNER JOIN productos AS p
+		// 										ON e.idProducto = p.idProducto WHERE (p.name LIKE :nombres OR p.claveProducto LIKE :nombres) 
+		// 										AND (e.disponible > 0)");
 		
 		$stmt -> execute(["nombres" => "%" . $nombres . "%"]);
 
 		return $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
 	}
+
+
 
 	public function mdlCodeSearch($codigo){
 

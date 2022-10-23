@@ -1,5 +1,6 @@
 
 //variables
+const btnGuardar = document.querySelector('#btnGuardar');
 const fechaMovimiento = document.querySelector("#fechaMovimiento");
 const totalLabel = document.querySelector("#totalFactura");
 const totalPedidoBD = document.querySelector('#totalPedidoBD');
@@ -29,6 +30,7 @@ function eventListeners(){
             $('#fechaMovimiento').datepicker('setDate', today);
 
             tablaResultados.style.display = "none";
+            btnGuardar.disabled = true;
         //productos = JSON.parse( localStorage.getItem('productos')) || [];
         // console.log(features);
         //crearHTML();
@@ -65,7 +67,8 @@ function buscaJS(name) {
          id: Date.now()+i,
          idProducto: data[i]["idProducto"],
          nombre: data[i]["name"],
-         disponible: data[i]["disponible"],
+         disponible: data[i]["disponibilidad"],
+         medida: data[i]["medida"],
          costo: data[i]["dayPrice"],
          cantidad: 0,
          medida: data[i]["medida"]
@@ -124,7 +127,7 @@ function buscaJS(name) {
   
         renglon.innerHTML = `
           <td>${ft.nombre}</td>
-          <td id="disp-${ft.id}">${ft.disponible}</td>
+          <td id="disp-${ft.id}">${parseInt(ft.disponible)}</td>
           <td>${ft.costo}</td>
         `;
   
@@ -170,6 +173,7 @@ function buscaJS(name) {
     limpiarTablaProductos();
     limpiarTablaResultados();
     if (productos.length > 0){
+      btnGuardar.disabled = false;
       
       productos.forEach( prod =>{
         let renglon = document.createElement("tr");
@@ -191,13 +195,16 @@ function buscaJS(name) {
   
         renglon.innerHTML = `
           <td>${prod.nombre}</td>
-          <td id="cant-${prod.id}">${prod.cantidad}</td>
+          <td id="cant-${prod.id}">${prod.cantidad} ${prod.medida}</td>
           <td id="costo-${prod.id}">${prod.costo}</td>
         `;
   
         renglon.appendChild(btnColumn);
         productsTable.appendChild(renglon);
       });
+    }
+    else{
+      btnGuardar.disabled = true;
     }
     
     sincronizarStorage();

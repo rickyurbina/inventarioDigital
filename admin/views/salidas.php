@@ -101,7 +101,7 @@
                                 <input type="text" class="form-control" name="pedidoNum" id="pedidoNum" value="<?php echo $siguiente; ?>" hidden>
                                 <input type="text" class="form-control" name="concepto" id="concepto" value="venta" hidden>
                                 <input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="text" name="fechaMovimiento" id="fechaMovimiento" hidden>
-                                <input type="text" class="form-control" name="pedidoBD" id="pedidoBD" >
+                                <input type="text" class="form-control" name="pedidoBD" id="pedidoBD" hidden >
                                 <input type="text" class="form-control" name="totalPedidoBD" id="totalPedidoBD" hidden>
                                 <input type="text" class="form-control" name="valorDescuento" id="valorDescuento" hidden>
                                 <input type="text" class="form-control" name="pedidoNeto" id="pedidoNeto" hidden>

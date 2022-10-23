@@ -100,6 +100,7 @@ function verCodigos(data){
       idProducto: data[0]["idProducto"],
       nombre: data[0]["name"],
       disponible: data[0]["disponibilidad"],
+      medida: data[0]["medida"],
       precio: data[0]["dayPrice"],
       cantidad: 1 ,
       medida: data[0]["medida"]
@@ -119,7 +120,7 @@ function viewSearchResult(data){
         id: Date.now()+i,
         idProducto: data[i]["idProducto"],
         nombre: data[i]["name"],
-        disponible: data[i]["disponible"],
+        disponible: data[i]["disponibilidad"],
         precio: data[i]["dayPrice"],
         cantidad: 0,
         medida: data[i]["medida"]
@@ -143,7 +144,7 @@ function creaOpciones(){
       let btnColumn = document.createElement("td");
       let inputColumn = document.createElement("td");
       let inputField = document.createElement("input");
-      inputColumn.style.width="10px";
+      inputField.style.width="40px";
       inputField.setAttribute('id', "cant"+ft.id);
       inputField.setAttribute('min', 1);
       inputField.setAttribute('max', ft.disponible);
@@ -177,7 +178,7 @@ function creaOpciones(){
 
       renglon.innerHTML = `
         <td>${ft.nombre}</td>
-        <td>${ft.disponible}</td>
+        <td>${parseInt(ft.disponible)}</td>
         <td>${ft.precio}</td>
       `;
 
@@ -240,7 +241,7 @@ function creaListaPedido(){
       renglon.innerHTML = `
         <td>${prod.nombre}</td>
         <td id="precio-${prod.id}">${prod.precio}</td>
-        <td id="cant-${prod.id}">${prod.cantidad}</td>
+        <td id="cant-${prod.id}">${prod.cantidad} ${prod.medida}</td>
       `;
 
       renglon.appendChild(btnColumn);
