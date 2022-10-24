@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 15, 2022 at 08:58 PM
--- Server version: 8.0.30
--- PHP Version: 8.0.23
+-- Generation Time: Oct 24, 2022 at 05:52 PM
+-- Server version: 8.0.23
+-- PHP Version: 8.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,35 +24,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asistencia`
---
-
-CREATE TABLE `asistencia` (
-  `id` int NOT NULL,
-  `idSocio` int NOT NULL,
-  `fecha` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
-
---
--- Dumping data for table `asistencia`
---
-
-INSERT INTO `asistencia` (`id`, `idSocio`, `fecha`) VALUES
-(1, 5, '2021-12-18 10:15:18'),
-(2, 10, '2022-05-12 12:02:52'),
-(3, 1, '2022-05-12 14:13:47'),
-(4, 1, '2022-06-01 21:46:55');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `brands`
 --
 
 CREATE TABLE `brands` (
   `id` int NOT NULL,
-  `nombre` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+  `nombre` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `brands`
@@ -69,23 +47,23 @@ INSERT INTO `brands` (`id`, `nombre`) VALUES
 
 CREATE TABLE `clientes` (
   `idCliente` int NOT NULL,
-  `nombres` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `apellidos` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `telefono` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `email` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `nombres` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `telefono` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `tipoCliente` int NOT NULL,
   `fechaNacimiento` date NOT NULL,
   `fechaRegistro` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `clientes`
 --
 
 INSERT INTO `clientes` (`idCliente`, `nombres`, `apellidos`, `telefono`, `email`, `tipoCliente`, `fechaNacimiento`, `fechaRegistro`) VALUES
+(0, 'Publico', 'en General', '6251233333', 'jesus@gmail.com', 1, '2022-09-29', '2022-09-27'),
 (1, 'Ricardo', 'Urbina', '6251221438', 'ricky@gmail.com', 1, '1975-11-05', '2021-12-08'),
-(5, 'Melany', 'Urbina Garcia', '6251065030', 'mell@gmail.com', 2, '2005-03-03', '2021-12-10'),
-(7, 'Jesus', 'Baray Legarda', '6251233333', 'jesus@gmail.com', 1, '2022-09-29', '2022-09-27');
+(5, 'Melany', 'Urbina Garcia', '6251065030', 'mell@gmail.com', 2, '2005-03-03', '2021-12-10');
 
 -- --------------------------------------------------------
 
@@ -108,28 +86,8 @@ CREATE TABLE `entradas` (
 --
 
 INSERT INTO `entradas` (`id`, `idProducto`, `cantidad`, `disponible`, `medida`, `costo`, `factura`) VALUES
-(17, 33, 15, 25, 'Kgs', 2, 0),
-(25, 34, 20, 20, 'Piezas', 12000, 2),
-(26, 32, 25, 25, 'Piezas', 40000, 2),
-(27, 35, 30, 20, 'Kgs', 1, 4),
-(28, 34, 35, 35, 'Kgs', 3, 4),
-(29, 35, 40, 30, 'Kgs', 11.7, 5),
-(31, 33, 45, 45, 'Kgs', 123, 6),
-(32, 32, 50, 0, 'Kgs', 333, 7),
-(37, 36, 100, 100, 'Kgs', 10, 8),
-(38, 36, 50, NULL, 'Kgs', 10, 8),
-(39, 37, 100, NULL, 'Kgs', 3, 9),
-(41, 38, 75, 65, 'Kgs', 3.5, 10),
-(42, 38, 100, 100, 'Kgs', 4, 11),
-(43, 38, 50, 50, 'Kgs', 4.3, 12),
-(45, 40, 100, NULL, 'Kgs', 10, 13),
-(46, 36, 50, NULL, 'Kgs', 12, 13),
-(50, 36, 100, NULL, 'Kgs', 10, 15),
-(51, 38, 200, NULL, 'Kgs', 20, 15),
-(53, 36, 100, NULL, 'Kgs', 17, 16),
-(54, 36, 50, NULL, 'Kgs', 20.5, 16),
-(55, 36, 50, 50, 'Kgs', 7, 17),
-(56, 41, 50, 50, 'Piezas', 150, 18);
+(1, 43, 1, 1, 'Pzas', 1599, 1),
+(2, 42, 1, 1, 'Pzas', 1550, 2);
 
 -- --------------------------------------------------------
 
@@ -141,32 +99,17 @@ CREATE TABLE `entradasEnc` (
   `factura` int NOT NULL,
   `idProveedor` int NOT NULL,
   `concepto` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `fecha` date NOT NULL
+  `fecha` date NOT NULL,
+  `totalFactura` double NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `entradasEnc`
 --
 
-INSERT INTO `entradasEnc` (`factura`, `idProveedor`, `concepto`, `fecha`) VALUES
-(0, 8, 'entrada', '2022-09-23'),
-(2, 7, 'entrada', '2022-08-16'),
-(3, 8, 'entrada', '2022-08-15'),
-(4, 8, 'entrada', '2022-08-15'),
-(5, 7, 'entrada', '2022-08-17'),
-(6, 8, 'entrada', '2022-08-17'),
-(7, 7, 'saldo', '2022-08-17'),
-(8, 8, 'entrada', '2022-09-23'),
-(9, 8, 'entrada', '2022-09-23'),
-(10, 8, 'entrada', '2022-09-23'),
-(11, 8, 'entrada', '2022-09-23'),
-(12, 8, 'entrada', '2022-09-23'),
-(13, 7, 'entrada', '2022-09-24'),
-(14, 8, 'entrada', '1970-01-01'),
-(15, 8, 'entrada', '1970-01-01'),
-(16, 8, 'entrada', '2022-10-11'),
-(17, 8, 'entrada', '2022-10-13'),
-(18, 8, 'entrada', '2022-10-13');
+INSERT INTO `entradasEnc` (`factura`, `idProveedor`, `concepto`, `fecha`, `totalFactura`) VALUES
+(1, 8, 'entrada', '2022-10-22', 1599),
+(2, 9, 'entrada', '2022-10-22', 1550);
 
 -- --------------------------------------------------------
 
@@ -176,19 +119,18 @@ INSERT INTO `entradasEnc` (`factura`, `idProveedor`, `concepto`, `fecha`) VALUES
 
 CREATE TABLE `eqType` (
   `id` int NOT NULL,
-  `nombre` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+  `nombre` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `eqType`
 --
 
 INSERT INTO `eqType` (`id`, `nombre`) VALUES
-(3, 'Abarrotes'),
-(4, 'Verduras'),
-(5, 'Plasticos'),
-(8, 'Frutas'),
-(9, 'Joyeria');
+(10, 'ROPA'),
+(11, 'CALZADO'),
+(12, 'ACCESORIOS'),
+(13, 'JOYERÍA');
 
 -- --------------------------------------------------------
 
@@ -198,34 +140,29 @@ INSERT INTO `eqType` (`id`, `nombre`) VALUES
 
 CREATE TABLE `productos` (
   `idProducto` int NOT NULL,
-  `claveProducto` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `brand` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `eqType` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `status` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT 'yard',
+  `claveProducto` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `name` varchar(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `brand` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `eqType` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `status` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'yard',
   `dayPrice` int NOT NULL,
   `weekPrice` int NOT NULL,
   `monthPrice` int NOT NULL,
-  `features` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `image` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `features` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `image` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `disponibilidad` decimal(10,2) DEFAULT '0.00',
   `costoPromedio` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `medida` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+  `medida` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `productos`
 --
 
 INSERT INTO `productos` (`idProducto`, `claveProducto`, `name`, `brand`, `eqType`, `status`, `dayPrice`, `weekPrice`, `monthPrice`, `features`, `image`, `disponibilidad`, `costoPromedio`, `medida`) VALUES
-(32, '02-retro', 'Retroescabadora', 'CAT', 'Tractor', 'out', 200, 700, 2500, '[{\"id\":1656633980976,\"feature\":\"motor\",\"featureValue\":\"5000\"},{\"id\":1656633992609,\"feature\":\"Capacidad\",\"featureValue\":\"5000\"},{\"id\":1656634040674,\"feature\":\"horas\",\"featureValue\":\"200\"}]', 'uploads/products/918f8d26683c84118b9a8ab925dd52e0triumph.jpeg', '75.00', '0.00', NULL),
-(33, '01-f', 'F400', 'GENIE', 'Tractor', 'yard', 100, 500, 2500, '[]', 'uploads/products/a4d3b944c1a68dd74683b5b01de1c3c384248.png', '40.00', '0.00', NULL),
-(34, '01-retro', 'Retro', 'Kubota', 'Cargadores', 'yard', 150, 600, 3000, '[]', 'uploads/products/1e35ea761c6eb8ec482022afd2862cdd119642.jpeg', '35.00', '0.00', NULL),
-(35, 'manzgold', 'Manzana Golden', 'CAT', 'Frutas', 'yard', 20, 15, 10, '[]', '', '50.00', '0.00', 'Kg'),
-(36, 't-01', 'Tomate', 'Generica', 'Abarrotes', 'yard', 10, 15, 20, '[]', '', '170.00', '12.36', NULL),
-(38, 'pl01', 'Platano', 'Generica', 'Abarrotes', 'yard', 5, 7, 10, '[]', '', '180.00', '0.00', NULL),
-(40, 'pap-01', 'Papa Lavada', 'Generica', 'Abarrotes', 'yard', 15, 20, 25, '[]', '', '0.00', '0.00', 'Kgs'),
-(41, '123456', 'Reloj Analógico Mujer', 'Generica', 'Joyeria', 'yard', 350, 0, 0, '[]', '', '35.00', '150.00', 'Pzas');
+(42, '123001', 'Tenis Para Hombre Nike Court Vision Low Next Nature', 'Generica', 'CALZADO', 'yard', 1550, 1300, 1100, '[]', 'uploads/products/3a14f56d7f4f2f62c6a8d0941190f993D_NQ_NP_803008-MLM48556411267_122021-O.jpeg', '-1.00', '1550.00', 'Pzas'),
+(43, '123002', 'Tenis De Entrenamiento Para Hombre Nike City Rep Tr', 'Generica', 'CALZADO', 'yard', 1599, 1399, 1099, '[]', 'uploads/products/569be28882236456eb4fb787f2a6c89eD_NQ_NP_745939-MLM48702243343_122021-O.jpeg', '0.00', '1599.00', 'Pzas'),
+(44, '123003', 'Cazadora Bomber Con Bordado De Letras Para Hombre', 'Generica', 'ROPA', 'yard', 556, 0, 0, '[]', 'uploads/products/48698edbc6d9d09158b765a08bb5cdcc6924450800_1_1_3.jpeg', '0.00', '0.00', 'Pzas');
 
 -- --------------------------------------------------------
 
@@ -235,20 +172,21 @@ INSERT INTO `productos` (`idProducto`, `claveProducto`, `name`, `brand`, `eqType
 
 CREATE TABLE `proveedores` (
   `idProveedor` int NOT NULL,
-  `nombre` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `direccion` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `telefono` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `email` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `nombre` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `direccion` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `telefono` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fechaRegistro` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `proveedores`
 --
 
 INSERT INTO `proveedores` (`idProveedor`, `nombre`, `direccion`, `telefono`, `email`, `fechaRegistro`) VALUES
-(7, 'Super Sandra Abarrotes Mayoreo y Medio mayoreo de la sierra tarahumara S.A. ', 'Rep. de colombia #158 CTM Ciudad Cuauhtemoc Chihuahua Mexico ', '6251112233', 'contacto@supersandra.com', '2022-08-02'),
-(8, 'Al Super Cuauhtemoc', 'Conocida', '6251234455', 'alsuper@gmail.com', '2022-08-03');
+(7, 'AMAZON ', 'WEB', '6251112233', 'contacto@amazon.com', '2022-08-02'),
+(8, 'Mercado Libre', 'Web', '6251234455', 'contacto@mercadolibre.com', '2022-08-03'),
+(9, 'Ajuste de Invetnario', 'Ajuste de Inventario ', '', '', '2022-10-23');
 
 -- --------------------------------------------------------
 
@@ -271,41 +209,10 @@ CREATE TABLE `salidas` (
 --
 
 INSERT INTO `salidas` (`id`, `idProducto`, `cantidad`, `medida`, `idCliente`, `precio`, `pedido`) VALUES
-(10, 35, 10, 'Kgs', 5, 20, 3),
-(30, 35, 10, 'Kgs', 5, 20, 4),
-(31, 32, 2, 'Piezas', 5, 150, 4),
-(32, 34, 2, 'Kgs', 5, 100, 4),
-(33, 34, 2, 'Kgs', 5, 100, 4),
-(34, 35, 20, 'Kgs', 5, 20, 4),
-(39, 35, 10, 'Kgs', 5, 20, 5),
-(40, 33, 10, 'Kgs', 5, 100, 5),
-(41, 32, 20, 'Kgs', 5, 150, 5),
-(43, 32, 10, 'Kgs', 5, 10, 11),
-(44, 32, 10, 'Kgs', 5, 10, 11),
-(45, 38, 15, 'Kgs', 5, 5, 17),
-(46, 38, 25, 'Kgs', 1, 5, 18),
-(47, 38, 25, 'Kgs', 1, 5, 19),
-(50, 38, 15, 'Kgs', 1, 5, 20),
-(51, 38, 30, 'Kgs', 5, 5, 23),
-(52, 40, 20, 'Kgs', 1, 15, 24),
-(60, 35, 13, 'Kgs', 1, 50, 1),
-(61, 38, 10, 'Kgs', 1, 5, 1),
-(62, 38, 10, 'Kgs', 1, 5, 28),
-(63, 38, 15, 'Kgs', 7, 5, 29),
-(64, 38, 15, 'Kgs', 7, 5, 30),
-(65, 38, 15, 'Kgs', 1, 5, 31),
-(66, 38, 15, 'Kgs', 5, 5, 32),
-(70, 41, 1, 'Piezas', 7, 350, 33),
-(71, 33, 10, 'Kgs', 7, 100, 33),
-(72, 34, 10, 'Piezas', 7, 150, 33),
-(73, 36, 10, 'Kgs', 7, 10, 33),
-(74, 36, 10, 'Kgs', 7, 10, 34),
-(75, 38, 10, 'Kgs', 7, 5, 35),
-(76, 41, 1, 'Piezas', 7, 350, 36),
-(77, 38, 10, 'Kgs', 0, 5, 37),
-(78, 36, 10, 'Kgs', 1, 10, 38),
-(79, 41, 2, 'Piezas', 1, 350, 38),
-(80, 41, 10, 'Piezas', 1, 350, 39);
+(1, 43, 1, 'Pzas', 7, 1599, 1),
+(2, 43, 1, 'Pzas', 7, 1599, 2),
+(3, 42, 1, 'Pzas', 7, 1550, 2),
+(4, 42, 1, 'Pzas', 0, 1550, 3);
 
 -- --------------------------------------------------------
 
@@ -318,38 +225,21 @@ CREATE TABLE `salidasEnc` (
   `idCliente` int NOT NULL,
   `fecha` date NOT NULL,
   `pedido` int NOT NULL,
-  `totalPedido` double NOT NULL
+  `totalPedido` double NOT NULL,
+  `descuento` double NOT NULL,
+  `totalNeto` double NOT NULL,
+  `status` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'V' COMMENT 'V = Vendido, C = Cancelado',
+  `pago` varchar(1) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'E' COMMENT 'E = Efectivo, T = Tarjeta, O = Otro'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `salidasEnc`
 --
 
-INSERT INTO `salidasEnc` (`id`, `idCliente`, `fecha`, `pedido`, `totalPedido`) VALUES
-(10, 1, '2022-08-18', 1, 700),
-(12, 5, '2022-09-12', 3, 200),
-(13, 5, '2022-09-12', 4, 1300),
-(15, 5, '2022-09-22', 5, 4200),
-(16, 5, '2022-09-23', 11, 200),
-(17, 5, '2022-09-30', 17, 75),
-(18, 1, '2022-09-23', 18, 125),
-(19, 1, '2022-09-30', 19, 125),
-(22, 1, '2022-09-23', 20, 75),
-(23, 5, '2022-09-23', 23, 150),
-(24, 1, '2022-09-24', 24, 300),
-(27, 5, '1970-01-01', 25, 0),
-(28, 1, '2022-10-11', 28, 250),
-(29, 7, '2022-10-11', 29, 75),
-(30, 7, '2022-10-11', 30, 75),
-(31, 1, '2022-10-11', 31, 75),
-(32, 5, '2022-10-11', 32, 75),
-(33, 7, '1970-01-01', 33, 2950),
-(34, 7, '1970-01-01', 34, 100),
-(35, 7, '1970-01-01', 35, 50),
-(36, 7, '2022-10-21', 36, 350),
-(37, 0, '2022-10-14', 37, 50),
-(38, 1, '2022-10-14', 38, 800),
-(39, 1, '2022-10-14', 39, 3500);
+INSERT INTO `salidasEnc` (`id`, `idCliente`, `fecha`, `pedido`, `totalPedido`, `descuento`, `totalNeto`, `status`, `pago`) VALUES
+(1, 7, '2022-10-22', 1, 1599, 0, 1599, 'C', 'E'),
+(2, 7, '2022-10-22', 2, 3149, 314, 2834, 'V', 'E'),
+(3, 0, '2022-10-22', 3, 1550, 0, 1550, 'V', 'T');
 
 -- --------------------------------------------------------
 
@@ -359,16 +249,16 @@ INSERT INTO `salidasEnc` (`id`, `idCliente`, `fecha`, `pedido`, `totalPedido`) V
 
 CREATE TABLE `socios` (
   `idSocio` int NOT NULL,
-  `nombres` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `apellidos` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `telefono` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `email` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `password` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `nombres` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `telefono` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `tipoSocio` int NOT NULL,
   `fechaNacimiento` date NOT NULL,
   `fechaRegistro` date NOT NULL,
   `fechaUltimoPago` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `socios`
@@ -387,14 +277,14 @@ INSERT INTO `socios` (`idSocio`, `nombres`, `apellidos`, `telefono`, `email`, `p
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `nombres` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `apellidos` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `nickName` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `email` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `telefono` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `permisos` varchar(13) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `password` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+  `nombres` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `apellidos` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nickName` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `permisos` varchar(13) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `password` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `users`
@@ -411,21 +301,21 @@ INSERT INTO `users` (`id`, `nombres`, `apellidos`, `nickName`, `email`, `telefon
 
 CREATE TABLE `usuarios` (
   `id` int NOT NULL,
-  `nombres` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `apellidos` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `nickName` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `telefono` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `email` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `password` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `personal` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci COMMENT 'Informacion personal del usuario que sera mostrada en el perfil de usuario',
-  `titulo` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL COMMENT 'Titulo que tiene en la empresa. ej. Gerente, Agente de ventas, etc',
-  `permisos` varchar(13) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL COMMENT 'El tipo de acceso que tiene en el sistema ej. Administrador, usuario, etc',
-  `foto` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci,
-  `estado` varchar(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL COMMENT 'Activo / Inactivo',
+  `nombres` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `apellidos` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `nickName` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(40) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `password` text CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `personal` text CHARACTER SET utf8 COLLATE utf8_spanish_ci COMMENT 'Informacion personal del usuario que sera mostrada en el perfil de usuario',
+  `titulo` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'Titulo que tiene en la empresa. ej. Gerente, Agente de ventas, etc',
+  `permisos` varchar(13) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL COMMENT 'El tipo de acceso que tiene en el sistema ej. Administrador, usuario, etc',
+  `foto` text CHARACTER SET utf8 COLLATE utf8_spanish_ci,
+  `estado` varchar(1) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL COMMENT 'Activo / Inactivo',
   `ultimoLogin` datetime DEFAULT NULL,
   `fechaNac` date DEFAULT NULL,
-  `sociales` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci COMMENT 'Los diferentes links a las redes sociales del usuario para ser contactado por los clientes.  En formato JSON'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+  `sociales` text CHARACTER SET utf8 COLLATE utf8_spanish_ci COMMENT 'Los diferentes links a las redes sociales del usuario para ser contactado por los clientes.  En formato JSON'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Dumping data for table `usuarios`
@@ -433,7 +323,7 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `nickName`, `telefono`, `email`, `password`, `personal`, `titulo`, `permisos`, `foto`, `estado`, `ultimoLogin`, `fechaNac`, `sociales`) VALUES
 (13, 'Ricardo', 'Urbina Najera', 'Rick', '6251221438', 'r@gmail.com', '$2y$10$4NxyweuG8QF71A7ch6zvleuaxTz2MFeeWaiN8Z6NF.B/9AVge/GAe', '', 'Gerente', 'administrador', 'assets/images/faces/1.jpg', '1', '0000-00-00 00:00:00', '1991-09-27', '{\"Facebook\":\"\",\"Twitter\":\"\",\"LinkedIn\":\"\"}'),
-(33, 'Jesus', 'Baray', 'Jesus', '6251221414', 'jesus@gmail.com', '$2y$10$HM0EyXxMNxdh6o1RLuhfCOhR/HBVSU1VV2oreVfQenXy7qOIzSG4q', NULL, NULL, 'usuario', NULL, '1', NULL, NULL, NULL);
+(33, 'Jesus', 'Baray', 'Jesus', '6251221414', 'j@gmail.com', '$2y$10$rTN6ZgBEADUB9hhQPbX7YOQRoDodZm3ENyNWoakRMWj.0WP5V9C6i', NULL, NULL, 'usuario', NULL, '1', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -443,9 +333,9 @@ INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `nickName`, `telefono`, `e
 
 CREATE TABLE `usuarios_token` (
   `TokenId` int NOT NULL,
-  `UsuarioId` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `Token` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `Estado` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `UsuarioId` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `Token` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `Estado` varchar(45) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `Fecha` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -458,39 +348,9 @@ INSERT INTO `usuarios_token` (`TokenId`, `UsuarioId`, `Token`, `Estado`, `Fecha`
 (801, '13', 'b0a295d7dcb8db6998c5675af9315a9b', 'Activo', '2022-06-30 23:32:00'),
 (802, '33', '0200d59a778560340c39a8332815ba7d', 'Activo', '2022-06-30 23:58:00');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `ventas`
---
-
-CREATE TABLE `ventas` (
-  `idVenta` int NOT NULL,
-  `idCliente` int NOT NULL,
-  `productos` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `total` double NOT NULL,
-  `fecha` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Dumping data for table `ventas`
---
-
-INSERT INTO `ventas` (`idVenta`, `idCliente`, `productos`, `total`, `fecha`) VALUES
-(1, 1, '[{\"idProducto\":\"5\",\"nombreProducto\":\"Proteina Mass Tech Extreme 2000\",\"cantidad\":1,\"precio\":1100}]', 1100, '2022-04-25'),
-(2, 6, '[{\"idProducto\":\"5\",\"nombreProducto\":\"Proteina Mass Tech Extreme 2000\",\"cantidad\":1,\"precio\":1100}]', 4400, '2022-04-25'),
-(3, 1, '[{\"idProducto\":\"5\",\"nombreProducto\":\"Proteina Mass Tech Extreme 2000\",\"cantidad\":1,\"precio\":1100}]', 1100, '2022-05-12'),
-(4, 10, '[{\"idProducto\":\"5\",\"nombreProducto\":\"Proteina Mass Tech Extreme 2000\",\"cantidad\":1,\"precio\":1100}]', 1100, '2022-05-12');
-
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `asistencia`
---
-ALTER TABLE `asistencia`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `brands`
@@ -572,20 +432,8 @@ ALTER TABLE `usuarios_token`
   ADD PRIMARY KEY (`TokenId`);
 
 --
--- Indexes for table `ventas`
---
-ALTER TABLE `ventas`
-  ADD PRIMARY KEY (`idVenta`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `asistencia`
---
-ALTER TABLE `asistencia`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `brands`
@@ -603,37 +451,37 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT for table `entradas`
 --
 ALTER TABLE `entradas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `eqType`
 --
 ALTER TABLE `eqType`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `idProducto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `idProducto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `idProveedor` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idProveedor` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `salidas`
 --
 ALTER TABLE `salidas`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `salidasEnc`
 --
 ALTER TABLE `salidasEnc`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `socios`
@@ -658,12 +506,6 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `usuarios_token`
   MODIFY `TokenId` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=803;
-
---
--- AUTO_INCREMENT for table `ventas`
---
-ALTER TABLE `ventas`
-  MODIFY `idVenta` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
