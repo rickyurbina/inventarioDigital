@@ -93,9 +93,9 @@
                                 
                                 <label class="form-label">Pago con :</label>
                                 <select class="form-control" name="tipoPago" id="idCliente">
-                                    <option value="1">Efectivo</option>
-                                    <option value="2">Tarjeta Credito/Debito</option>
-                                    <option value="3">Otro</option>
+                                    <option value="E">Efectivo</option>
+                                    <option value="T">Tarjeta Credito/Debito</option>
+                                    <option value="O">Otro</option>
                                 </select>
 
                                 <input type="text" class="form-control" name="pedidoNum" id="pedidoNum" value="<?php echo $siguiente; ?>" hidden>

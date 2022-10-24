@@ -1,15 +1,8 @@
-<div class="page-header">
-	<h4 class="page-title">Stock List</h4>
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="#">Stock Admin</a></li>
-		<li class="breadcrumb-item active" aria-current="page">Stock List</li>
-	</ol>
-</div>
-
+<br>
 <div class="col-md-12 col-lg-12">
 	<div class="card">
 		<div class="card-header">
-			<div class="card-title">Pedidos</div>
+			<div class="card-title">Ventas</div>
 
 		</div>
 		<div class="card-body">
@@ -20,6 +13,7 @@
 						<td>Cliente</td>
 						<td>Fecha</td>
 						<td>Monto</td>
+						<td>Estado</td>
 						<td>opciones</td>
 					</thead>
 					<tbody>
@@ -36,6 +30,7 @@
 							<td>Cliente</td>
 							<td>Fecha</td>
 							<td>Monto</td>
+							<td>Estado</td>
 							<td>opciones</td>
 						</tr>
 					</tfoot>

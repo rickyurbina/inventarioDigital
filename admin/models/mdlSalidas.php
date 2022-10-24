@@ -36,8 +36,8 @@ class mdlSalidas {
 
     public static function mdlRegistraPedido($datos_pedido){
 
-        $stmt = Conexion::conectar()->prepare("INSERT INTO `salidasEnc` (`id`, `idCliente`, `fecha`, `pedido`, `totalPedido`, `descuento`, `totalNeto`) 
-        VALUES (NULL, :idCliente, :fechaMovimiento, :pedido, :totalPedido, :valorDescuento, :pedidoNeto);");
+        $stmt = Conexion::conectar()->prepare("INSERT INTO `salidasEnc` (`id`, `idCliente`, `fecha`, `pedido`, `totalPedido`, `descuento`, `totalNeto`, `pago`) 
+        VALUES (NULL, :idCliente, :fechaMovimiento, :pedido, :totalPedido, :valorDescuento, :pedidoNeto, :tipoPago);");
 
          $stmt -> bindParam(":pedido", $datos_pedido["pedido"], PDO::PARAM_INT);         
          $stmt -> bindParam(":idCliente", $datos_pedido["idCliente"], PDO::PARAM_INT);
@@ -45,6 +45,7 @@ class mdlSalidas {
          $stmt -> bindParam(":valorDescuento", $datos_pedido["valorDescuento"], PDO::PARAM_INT);
          $stmt -> bindParam(":pedidoNeto", $datos_pedido["pedidoNeto"], PDO::PARAM_INT);
          $stmt -> bindParam(":fechaMovimiento", $datos_pedido["fechaMovimiento"], PDO::PARAM_STR);
+         $stmt -> bindParam(":tipoPago", $datos_pedido["tipoPago"], PDO::PARAM_STR);
         //  $stmt2 = Conexion::conectar()->prepare("UPDATE productos SET disponibilidad = (SELECT SUM(`cantidad`) FROM `entradas` WHERE `idProducto`= :idProducto) WHERE idProducto = :idProducto");
         //  $stmt2 -> bindParam(":idProducto", $datos["idProducto"], PDO::PARAM_INT);
          
@@ -209,24 +210,27 @@ class mdlSalidas {
     # Borrar Entrada de inventario
 	#-------------------------------------
 	public static function mdlBorrarEncSalidas($datosModel){
-		$stmt = Conexion::conectar()->prepare("DELETE FROM salidasEnc WHERE pedido = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE `salidasEnc` SET `status`='C' WHERE pedido = :id");
 		$stmt -> bindPARAM(":id",$datosModel, PDO::PARAM_INT);
+        // Despues de cancelar la compra se debe hacer el ajuste del dinero al cajero =========================================================
+        
+        //=====================================================================================================================================
 
         // este script busca las entradas correspondientes al pedido para devolver las cantidades corrrespondientes
         // a cada lote
-        $stmt2 = Conexion::conectar()->prepare("UPDATE entradas e
-                                                INNER JOIN salidas s ON e.idProducto = s.idProducto
-                                                SET e.disponible = e.disponible + s.cantidad
-                                                where e.lote = s.lote and s.pedido = :id");
+        $stmt2 = Conexion::conectar()->prepare("UPDATE productos p
+                                                INNER JOIN salidas s ON p.idProducto = s.idProducto
+                                                SET p.disponibilidad = p.disponibilidad + s.cantidad
+                                                where s.pedido = :id");
 		$stmt2 -> bindPARAM(":id",$datosModel, PDO::PARAM_INT);
 
 
-        $stmt3 = Conexion::conectar()->prepare("DELETE FROM salidas WHERE pedido = :id");
-        $stmt3 -> bindPARAM(":id",$datosModel, PDO::PARAM_INT);
+        // $stmt3 = Conexion::conectar()->prepare("UPDATE `salidasEnc` SET `status`='C' WHERE pedido = :id");
+        // $stmt3 -> bindPARAM(":id",$datosModel, PDO::PARAM_INT);
 
         if ($stmt->execute()) $msg = 'success'; else $msg = 'Encabezado';
         if ($stmt2->execute()) $msg = 'success'; else $msg = 'Devolver';
-        if ($stmt3->execute()) $msg = 'success'; else $msg = 'Salidas';
+        // if ($stmt3->execute()) $msg = 'success'; else $msg = 'Salidas';
 
 		return $msg;
 	}

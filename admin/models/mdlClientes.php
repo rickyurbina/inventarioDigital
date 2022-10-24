@@ -75,7 +75,7 @@ class mdlClientes {
 
 	public static function mdlListClientes($tabla){
 
-		$stmt = Conexion::conectar()->prepare("SELECT idCliente, nombres, apellidos FROM $tabla ORDER BY nombres ASC");
+		$stmt = Conexion::conectar()->prepare("SELECT idCliente, nombres, apellidos FROM $tabla ORDER BY idCliente ASC");
 		$stmt->execute();
 		return $stmt->fetchAll();
 

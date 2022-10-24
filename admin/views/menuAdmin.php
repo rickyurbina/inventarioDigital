@@ -1,9 +1,9 @@
 	<ul class="side-menu">
 
 		<!-- Home -->
-			<li class="slide <?php if ($pagina == 'inicio') echo 'is-expanded'; ?>">
-				<a class="side-menu__item <?php if ($pagina == 'inicio') echo 'active'; ?>" 
-				href="index.php?page=inicio"><i class="side-menu__icon fa fa-home"></i><span class="side-menu__label">Home</span></a>
+			<li class="slide <?php if ($pagina == 'inicioAdmin') echo 'is-expanded'; ?>">
+				<a class="side-menu__item <?php if ($pagina == 'inicioAdmin') echo 'active'; ?>" 
+				href="index.php?page=inicioAdmin"><i class="side-menu__icon fa fa-home"></i><span class="side-menu__label">Home</span></a>
 			</li>
 
 		<!-- Compras -->

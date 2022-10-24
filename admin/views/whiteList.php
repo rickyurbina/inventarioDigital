@@ -1,6 +1,7 @@
 <!-- Contenido  -->
 <?php
-    if($pagina=="inicio" ||
+    if ($permisos == 'administrador'){
+        if($pagina=="inicioAdmin" ||
         $pagina == "salidas" || 
         $pagina == "nvaSalidas" || 
         $pagina == "salidasAdd" || 
@@ -49,10 +50,33 @@
         $pagina == "productEdit" || 
         $pagina == "productList" || 
         $pagina == "productStatus" ||
-        $pagina == "logOut" ||
-        $pagina == "search" )
+        $pagina == "logOut")
         {
             include "views/".$pagina.".php";
         }
+
+    }
+    else if ($permisos == 'usuario'){
+        if($pagina=="inicioCaja" ||
+            $pagina == "salidas" || 
+            $pagina == "salidasAdd" || 
+            $pagina == "salidasList" || 
+            $pagina == "salidasEdita" ||
+            $pagina == "salidasEdit" || 
+            $pagina == "salidaDel" || 
+            $pagina == "entradas" || 
+            $pagina == "entradaAdd" || 
+            $pagina == "entradasList" || 
+            $pagina == "entradasEdit" || 
+            $pagina == "entradaDel" || 
+            $pagina == "salidas" ||
+            $pagina == "venta" ||
+            $pagina == "ventaList" ||
+            $pagina == "logOut")
+        {
+            include "views/".$pagina.".php";
+        }
+    }
+    
 ?>
 <!-- fin de contenido -->

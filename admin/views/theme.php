@@ -1,6 +1,9 @@
 <?php
 session_start();
 if (isset($_SESSION["nombre"])){
+	$permisos = $_SESSION["permisos"];
+	if ($permisos == 'administrador') $linkInicio = 'inicioAdmin';
+	else if ($permisos == 'usuario') $linkInicio = 'inicioCaja';
 }
 else{
 	echo '<script>window.location="../";</script>';
@@ -82,7 +85,7 @@ setlocale(LC_ALL,"es_ES");
 				<div class="app-header1 header py-1 d-flex">
 					<div class="container-fluid">
 						<div class="d-flex">
-							<a class="header-brand" href="index.php?page=inicio">
+							<a class="header-brand" href="index.php?page=<?php echo $linkInicio;?>">
 								<img src="assets/images/brand/logo.png" class="header-brand-img" alt="Business logo">
 							</a>
 							<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a>
@@ -118,7 +121,7 @@ setlocale(LC_ALL,"es_ES");
 							<div class="dropdown user-pro-body">
 								<div>
 									<img src="assets/images/faces/1.jpg" alt="user-img" class="avatar avatar-lg brround">
-									<a href="index.php?page=userEdit&idEditar=<?php echo $_SESSION["id"]?>" class="profile-img">
+									<a href="index.php?page=userEdit&idEditar=<?php echo $_SESSION["id"];?>" class="profile-img">
 										<span class="fa fa-pencil" aria-hidden="true"></span>
 									</a>
 								</div>
@@ -130,12 +133,11 @@ setlocale(LC_ALL,"es_ES");
 						</div>
 						
 						<?php 
-							if( $_SESSION["permisos"] == 'administrador' )	include "menuAdmin.php"; 
-							else if ( $_SESSION["permisos"] == 'usuario') include "menu.php";
+							if( $permisos == 'administrador' )	include "menuAdmin.php"; 
+							else if ( $permisos == 'usuario') include "menu.php";
 						?>
 					</aside>
 				</div>
-
 
 
 				<div class="app-content  my-3 my-md-5">
@@ -223,7 +225,7 @@ setlocale(LC_ALL,"es_ES");
 		<script src="assets/js/moment.min.js"></script>
 
 		<!-- ECharts Plugin -->
-		<!-- <script src="assets/plugins/echarts/echarts.js"></script>
+		<script src="assets/plugins/echarts/echarts.js"></script>
 		<script src="assets/plugins/echarts/echarts.js"></script>
 		<script>
 			$(document).ready(function() {
@@ -328,7 +330,7 @@ setlocale(LC_ALL,"es_ES");
 
 				});
 
-		</script> -->
+		</script>
 
 		<!-- CHARTJS CHART -->
 		<script src="assets/plugins/chart/Chart.bundle.js"></script>

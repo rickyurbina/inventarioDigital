@@ -21,8 +21,15 @@ class Ingreso{
 					$_SESSION["nombre"] = $respuesta["nombres"];
 					$_SESSION["foto"] = $respuesta["foto"];
 					//$_SESSION["perfil"] = $respuesta["perfil"];
-
-					echo '<script>window.location="admin/index.php?page=inicio";</script>';
+					if ($respuesta["permisos"] == 'administrador')
+					{
+						echo '<script>window.location="admin/index.php?page=inicio";</script>';
+					}
+					else
+					{
+						echo '<script>window.location="admin/index.php?page=inicioCaja";</script>';
+					}
+					
 				} else {
 					echo '<div class="alert alert-danger">Verifique Usuario/Password</div>';
 				}

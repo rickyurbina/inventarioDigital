@@ -59,9 +59,9 @@
                         <div class="form-group">
                             <label class="form-label">Tipo Cliente</label>
                             <select class="form-control custom-select select2" name="tipoCliente" >
-                                <option <?php if ($busca['tipoCliente'] == "1") echo "selected"; ?> value="1">Socio</option>
-                                <option <?php if ($busca['tipoCliente'] == "2") echo "selected"; ?> value="2">Estudiante</option>
-                                <option <?php if ($busca['tipoCliente'] == "3") echo "selected"; ?> value="3">Referido</option>                                
+                                <option <?php if ($busca['tipoCliente'] == "1") echo "selected"; ?> value="1">Publico en General</option>
+                                <option <?php if ($busca['tipoCliente'] == "2") echo "selected"; ?> value="2">Mayorista</option>
+                                <option <?php if ($busca['tipoCliente'] == "3") echo "selected"; ?> value="3">Preferente</option>                              
                             </select>
                         </div>
                     </div>

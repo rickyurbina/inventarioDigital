@@ -121,9 +121,9 @@ Class clientes {
 		$respuesta = mdlClientes::mdlListaCliente("clientes");
 
 		foreach ($respuesta as $row => $item){
-            if ($item["tipoCliente"] == 1) $tipoCliente = '<td>Socio</td>';
-            if ($item["tipoCliente"] == 2) $tipoCliente = '<td>Estudiante</td>';
-            if ($item["tipoCliente"] == 3) $tipoCliente = '<td>Referido</td>';
+            if ($item["tipoCliente"] == 1) $tipoCliente = '<td>Publico en General</td>';
+            if ($item["tipoCliente"] == 2) $tipoCliente = '<td>Mayorista</td>';
+            if ($item["tipoCliente"] == 3) $tipoCliente = '<td>Preferente</td>';
             $cumple = strftime("%d de %B", strtotime($item["fechaNacimiento"]));
             $registro = strftime("%d de %B de %Y", strtotime($item["fechaRegistro"]));
 

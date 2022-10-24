@@ -7,27 +7,27 @@
 				href="index.php?page=inicio"><i class="side-menu__icon fa fa-home"></i><span class="side-menu__label">Home</span></a>
 			</li>
 
-		<!-- Compras -->
+		<!-- Compras 
 			<li class="slide <?php if ($pagina == 'entradas' || $pagina == 'entradasList' ) echo 'is-expanded'; ?>">
 				<a class="side-menu__item 
-					<?php if ($pagina == 'entradas' || $pagina == 'entradasList' ) 
-							echo 'active'; ?>" data-toggle="slide" href="#">
+					<?php //if ($pagina == 'entradas' || $pagina == 'entradasList' ) 
+							//echo 'active'; ?>" data-toggle="slide" href="#">
 							<i class="side-menu__icon fa fa-money"></i>
 							<span class="side-menu__label">Compras</span>
 							<i class="angle fa fa-angle-right"></i>
 				</a>
 				<ul class="slide-menu">
 					<li><a class="slide-item 
-						<?php if ($pagina == 'entradas') 
-								echo 'active'; ?>" href="index.php?page=entradas">Registrar</a>
+						<?php //if ($pagina == 'entradas') 
+								//echo 'active'; ?>" href="index.php?page=entradas">Registrar</a>
 					</li>
 					<li><a class="slide-item 
-						<?php if ($pagina == 'entradasList') 
-								echo 'active'; ?>" href="index.php?page=entradasList">Lista</a>
+						<?php //if ($pagina == 'entradasList') 
+								//echo 'active'; ?>" href="index.php?page=entradasList">Lista</a>
 					</li>
 
 				</ul>
-			</li>
+			</li>-->
 
 
 		<!-- Ventas -->
@@ -51,8 +51,6 @@
 
 				</ul>
 			</li>
-			
-			<br><br><h3>Catalogos</h3>
 
 	</ul>
 

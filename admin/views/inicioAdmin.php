@@ -1,7 +1,7 @@
 <div class="page-header">
-    <h4 class="page-title">Admin panel</h4>
+    <h4 class="page-title">Panel de Administración</h4>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Home</li>
+        <li class="breadcrumb-item active" aria-current="page">.</li>
     </ol>
 </div>
 <div class="row">

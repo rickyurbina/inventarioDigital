@@ -109,17 +109,19 @@ function buscaJS(name) {
   
         //añadimos la funcion de eliminar
         btnAgrearAPedido.onclick = () => {
-
           let cantidad = Number(document.querySelector("#cant"+ft.id).value);
-          let disponible = Number(document.querySelector("#disp-"+ft.id).innerText);
+          agregarProductoLista(ft, cantidad); 
+
+          // let cantidad = Number(document.querySelector("#cant"+ft.id).value);
+          // let disponible = Number(document.querySelector("#disp-"+ft.id).innerText);
   
-          if ( cantidad < 1 || cantidad > disponible ){
-            mostrarError('La cantidad es incorrecta');
-            return
-          }
-          else {
-            agregarProductoLista(ft, cantidad); 
-          }
+          // if ( cantidad < 1 || cantidad > disponible ){
+          //   mostrarError('La cantidad es incorrecta');
+          //   return
+          // }
+          // else {
+          //   agregarProductoLista(ft, cantidad); 
+          // }
         }
   
   

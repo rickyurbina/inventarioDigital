@@ -13,6 +13,7 @@ Class Salidas {
         $datos_pedido = array ("idCliente" => $_POST["idCliente"],
                                 "pedido" => $_POST["pedidoNum"],
                                 "concepto" => $_POST["concepto"],
+                                "tipoPago" => $_POST["tipoPago"],
                                 "totalPedido" => $_POST["totalPedidoBD"],
                                 "valorDescuento" => $_POST["valorDescuento"],
                                 "pedidoNeto" => $_POST["pedidoNeto"],
@@ -229,19 +230,29 @@ Class Salidas {
   
       foreach ($respuesta as $row => $item){
               $registro = strftime("%d de %B de %Y", strtotime($item["fecha"]));
-  
+              $cancelado = '';
+              $opcion = '<a href="index.php?page=salidasList&idBorrar='.$item["pedido"].'" class="dropdown-item"><i class="dropdown-icon pe-7s-junk"></i> Cancelar </a>';
+              if ($item["status"]=='C') 
+              {
+                $cancelado = '<button type="button" class="btn btn-icon btn-primary">X</button>';
+                $opcion = '';
+              }
+              
+              else $cancelado = '<button type="button" class="btn btn-icon btn-green"><i class="fa fa-check" aria-hidden="true"></i></button>';
+
               echo '
               <tr>
                   <td>'.$item["pedido"].'</td>
                   <td>'.$item["nombres"].'</td>
                   <td>'.$registro.'</td>
-                  <td>'.$item["totalPedido"].'</td>
+                  <td>'.$item["totalNeto"].'</td>
+                  <td>'.$cancelado.'</td>
                   <td>
                       <div class="item-action dropdown">
                           <a href="javascript:void(0)" data-toggle="dropdown" class="icon" aria-expanded="false"><i class="fe fe-more-vertical fs-20 text-dark"></i></a>
                           <div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-172px, 22px, 0px); top: 0px; left: 0px; will-change: transform;">
-                              <a href="index.php?page=salidasEdit&idSalida='.$item["pedido"].'" class="dropdown-item"><i class="dropdown-icon fe fe-edit-2"></i> Editar </a>
-                              <a href="index.php?page=salidasList&idBorrar='.$item["pedido"].'" class="dropdown-item"><i class="dropdown-icon fe fe-user-x"></i> Borrar </a>
+                            <a href="index.php?page=salidasEdit&idSalida='.$item["pedido"].'" class="dropdown-item"><i class="dropdown-icon icon icon-list"></i> Detalle </a>  
+                            '.$opcion.'
                           </div>
                       </div>
                   </td>

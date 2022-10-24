@@ -53,9 +53,9 @@
                         <div class="form-group">
                             <label class="form-label">Tipo Cliente</label>
                             <select class="form-control custom-select select2" name="tipoCliente" >
-                                <option value="1">Preferente</option>
+                                <option value="1">Publico en General</option>
                                 <option value="2">Mayorista</option>
-                                <option value="3">Minorista</option>
+                                <option value="3">Preferente</option>
                                 
                             </select>
                         </div>

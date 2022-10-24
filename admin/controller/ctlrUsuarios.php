@@ -59,13 +59,6 @@ Class usuarios {
     public static function ctrActualiza(){
         if(isset($_POST["btnActualiza"])){
 
-            // echo $_POST["nickName"]."<br>";
-            // echo $_POST["email"]."<br>";
-            // echo $_POST["nombres"]."<br>";
-            // echo $_POST["apellidos"]."<br>";
-            // echo $_POST["telefono"]."<br>";
-            // echo $_POST["permisos"]."<br>";
-
             $datos = array("userId" => $_POST["userId"],
                            "email" => $_POST["email"],
                            "nickName" => $_POST["nickName"],
@@ -87,7 +80,7 @@ Class usuarios {
                     confirmButtonText: 'Ok'
                     }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location='index.php?page=userList'
+                        window.location='index.php?page=inicio'
                     }
                     })
                     </script>";
@@ -100,13 +93,16 @@ Class usuarios {
                     confirmButtonText: 'Ok'
                   }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location='index.php?page=userList'
+                        window.location='index.php?page=inicio'
                     }
                   })
                   </script>";
 
             }
             
+        }
+        if (isset($_POST["btnCancel"])){
+            echo '<script>window.location="index.php?page=inicio";</script>';
         }
     }
 
