@@ -23,7 +23,7 @@ class Ingreso{
 					//$_SESSION["perfil"] = $respuesta["perfil"];
 					if ($respuesta["permisos"] == 'administrador')
 					{
-						echo '<script>window.location="admin/index.php?page=inicio";</script>';
+						echo '<script>window.location="admin/index.php?page=inicioAdmin";</script>';
 					}
 					else
 					{
